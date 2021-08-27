@@ -1,0 +1,94 @@
+@import '../../styles/variables.scss';
+
+main.main {
+    flex: 1;
+    // background-color: red;
+
+    form.form {
+        flex: 1;
+        // background-color: blue;
+        display: flex;
+        justify-content: center;
+        // align-items: center;
+        min-height: 90vh;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 30%;
+
+        h1 {
+            font-family: $main-font;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-family: $main-font;
+        }
+
+        input {
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            font-family: $main-font;
+        }
+
+        button {
+            margin: 0.5rem 0;
+            // background-color: #3373C4;
+            // color: white;
+            height: 40px;
+            border-radius: 7px;
+            // border: none;
+            outline: none;
+            font-family: $main-font;
+            cursor: pointer;
+            font-weight: 700;
+
+            &.signin {
+                background-color: #3373C4;
+                color: white;
+                border: none;
+            }
+
+            &.google {
+                display: flex;
+                background-color: white;
+                box-shadow: 0 0px 80px rgba(0, 0, 0, 0.07);
+                justify-content: center;
+                color: #DB4437;
+                align-items: center;
+                border: solid #DB4437 3px ;
+                // border-top-color: #4285F4;
+                // border-top-width: 4px;
+                // border-right-color: #DB4437;
+                // border-right-width: 4px;
+                // border-bottom-color: #F4B400;
+                // border-bottom-width: 4px;
+                // border-left-color: #0F9D58;
+                // border-left-width: 4px;
+            }
+
+            &.facebook {
+                background-color: #4267B2;
+                color: white;
+                border: none;
+            }
+        }
+
+        p {
+            font-family: $main-font;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+
+        a {
+            margin-top: 0.5rem;
+            font-family: $main-font;
+            font-size: 0.8rem;
+            color: #4285F4;
+            font-weight: 700;
+        }
+
+    }
+}
