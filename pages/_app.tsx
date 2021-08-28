@@ -3,36 +3,19 @@ import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { getAuth, onAuthStateChanged } from '@firebase/auth'
 
+// Contexts
+import { AuthProvider } from '../contexts/authContext'
+
 // Components
 import { Header } from '../components/header/header'
 
-// Firebase
-// import { setUp, auth } from '../firebase/config'
-
-// setUp()
-
 const MyApp = ({ Component, pageProps }: AppProps) => {
 
-  // useEffect(() => {
-
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-      
-  //     if (!user) {
-  //       return console.log('unauth')
-  //     }
-
-  //     console.log(user)
-
-  //   })
-
-  //   return () => unsubscribe()
-  // }, [])
-
   return (
-    <div>
+    <AuthProvider>
       <Header/>
       <Component {...pageProps} />
-    </div>
+    </AuthProvider>
   )
 }
 

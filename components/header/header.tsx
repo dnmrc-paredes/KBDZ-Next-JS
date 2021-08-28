@@ -1,18 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/dist/client/router";
+import { signOut, User } from "@firebase/auth";
 import Link from 'next/link'
+import { IoCartOutline } from 'react-icons/io5'
+import { Badge } from '@material-ui/core';
+
+// Context
+import { useAuth } from "../../contexts/authContext";
 
 // Styles
 import s from './header.module.scss'
 
+// Firebase
+import { firebaseAuth } from "../../firebase/client";
+
 export const Header = () => {
+
+    const router = useRouter()
 
     const [showMenu1, setShowMenu1] = useState(false)
     const [showMenu2, setShowMenu2] = useState(false)
+    const { user } = useAuth() as { user: User, isLoggedIn: boolean}
 
     return (
         <nav className={s.navbar}>
             <div className={s.navlogo}>
-                <h1> Kbdz </h1>
+                <h1 onClick={() => router.push('/')}> Kbdz </h1>
             </div>
             
             <div className={s.navlinks}>
@@ -58,7 +71,14 @@ export const Header = () => {
             </div>
 
             <div className={s.loginregister}>
-                <Link href="login"> Login / Register </Link>
+                <Badge style={{margin: '0 2rem', cursor: 'pointer'}} badgeContent={ user ? 10 : 0 } color="primary" > <IoCartOutline size={25} color="#3373C4" /> </Badge>
+                { user ? <p onClick={() => {
+                    document.cookie = `KBDZToken=; path=/;`
+                    // document.cookie = `KBDZAccessToken=; path=/;`
+                    signOut(firebaseAuth)
+                }}> Logout </p> : <p>
+                    <Link href="login"> Login </Link> / <Link href="register"> Register </Link>
+                </p> }
             </div>
         </nav>
     )

@@ -1,6 +1,17 @@
-import { NextPage } from 'next'
+import { NextPage, GetStaticProps } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
+
+export const getStaticProps: GetStaticProps = () => {
+
+  return {
+    redirect: {
+      destination: '/shop',
+      permanent: true
+    }
+  }
+
+}
 
 const Home: NextPage = () => {
   return (

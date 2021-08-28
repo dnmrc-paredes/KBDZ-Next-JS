@@ -1,12 +1,46 @@
 import React, { useState, ChangeEvent } from "react";
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
+import cookies from 'next-cookies'
+
+// Firebase
+import { firebaseAuth } from "../../firebase/client";
+import { firebaseAdmin } from "../../firebase/server";
 
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
 import s from './register.module.scss'
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => { 
+
+    const { KBDZToken } = cookies(ctx) as { KBDZToken: string }
+
+    try {
+
+        const result = await firebaseAdmin.verifyIdToken(KBDZToken, true)
+
+        if (result.uid) {
+            return {
+                redirect: {
+                    destination: '/shop',
+                    permanent: true
+                },
+                props: {  }
+            }
+        }
+        
+    } catch (err) {
+        console.log(err.code)
+    }
+
+    return {
+        props: {}
+    }
+
+}
 
 const Register = () => {
 
@@ -26,8 +60,7 @@ const Register = () => {
 
     const signUpHandler = () => {
 
-        const auth = getAuth()
-        createUserWithEmailAndPassword(auth, user.email, user.password).then(data => {
+        createUserWithEmailAndPassword(firebaseAuth, user.email, user.password).then(data => {
 
             const { user: creds } = data
 

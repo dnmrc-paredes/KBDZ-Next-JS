@@ -1,32 +1,54 @@
-import React, { useState, ChangeEvent } from "react";
-import { GetServerSideProps, NextPage } from "next";
+import React, { useState, ChangeEvent, useEffect } from "react";
+import { GetServerSideProps, NextPage, GetStaticProps } from "next";
 import Head from 'next/head'
+import { useRouter } from "next/dist/client/router";
 import { FcGoogle } from 'react-icons/fc'
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, setPersistence, browserLocalPersistence } from "@firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, User } from "@firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
+import cookies from 'next-cookies'
+// import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { auth } from "../../firebase/config";
+// Firebase
+import { firebaseAuth } from "../../firebase/client";
+import { firebaseAdmin } from "../../firebase/server";
 
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
 import s from './login.module.scss'
 
-// export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => { 
 
-//     onAuthStateChanged(auth, (user) => {
-//         console.log(user)
-//     })
-    
+    const { KBDZToken } = cookies(ctx) as { KBDZToken: string }
 
-//     return {
-//         props: {}
-//     }
+    try {
 
-// }
+        const result = await firebaseAdmin.verifyIdToken(KBDZToken, true)
+
+        if (result.uid) {
+            return {
+                redirect: {
+                    destination: '/shop',
+                    permanent: true
+                },
+                props: {  }
+            }
+        }
+        
+    } catch (err) {
+        console.log(err.code)
+    }
+
+    return {
+        props: {}
+    }
+
+}
 
 const Login: NextPage = () => {
 
+    const router = useRouter()
+    // const [user, loading, error] = useAuthState(firebaseAuth) as [ user: User, loading: boolean, error: any ]
     const [userInput, setUserInput] = useState({
         email: "",
         password: ""
@@ -34,7 +56,7 @@ const Login: NextPage = () => {
 
     const emailPasswordHandler = () => {
 
-        signInWithEmailAndPassword(auth, userInput.email, userInput.password).then(user => {
+        signInWithEmailAndPassword(firebaseAuth, userInput.email, userInput.password).then(async user => {
 
             if (!user.user.emailVerified) {
                 return toast('Please verify your email first.', {
@@ -42,7 +64,11 @@ const Login: NextPage = () => {
                 })
             }
 
-            console.log(user.user)
+            const token = await user.user.getIdToken()
+            document.cookie = `KBDZToken=${token}; path=/;`
+            router.push('/shop')
+
+            console.log(user.user.getIdToken)
 
         }).catch(err => {
             const msg = err.message
@@ -67,14 +93,15 @@ const Login: NextPage = () => {
     const googleSignIn = () => {
 
         const provider = new GoogleAuthProvider()
-        signInWithPopup(auth, provider)
-            .then(result => {
+        signInWithPopup(firebaseAuth, provider)
+            .then(async (result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential!.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-                console.log(result)
+                const credential = GoogleAuthProvider.credentialFromResult(result)
+                const token = await result.user.getIdToken()
+                
+                document.cookie = `KBDZToken=${token}; path=/;`
+                router.push('/shop')
+                // document.cookie = `KBDZAccessToken=${accessToken}; path=/;`
 
                 // ...
             }).catch(error => {
@@ -92,16 +119,17 @@ const Login: NextPage = () => {
 
     const facebookSignIn = () => {
 
-        const auth = getAuth()
         const provider = new FacebookAuthProvider()
-        signInWithPopup(auth, provider)
-            .then(result => {
+        signInWithPopup(firebaseAuth, provider)
+            .then(async result => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 const credential = FacebookAuthProvider.credentialFromResult(result);
-                const token = credential!.accessToken;
+                const token = await result.user.getIdToken()
                 // The signed-in user info.
                 const user = result.user;
                 console.log(credential)
+                document.cookie = `KBDZToken=${token}; path=/;`
+                router.push('/shop')
                 // ...
             }).catch(error => {
                 // Handle Errors here.
