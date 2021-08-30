@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    // background-color: red;
+    
+    p {
+        font-family: $main-font;
+        font-weight: 600;
+    }
+}

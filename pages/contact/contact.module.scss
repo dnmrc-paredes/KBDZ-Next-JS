@@ -1,0 +1,85 @@
+@import '../../styles/variables.scss';
+
+main.main {
+    min-height: 80vh;
+    display: flex;
+    // align-items: center;
+    margin: 3rem;
+    flex-direction: column;
+
+    h1 {
+        margin: 3rem 0;
+        text-align: center;
+        font-family: $main-font;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    form {
+        flex: 1;
+        // display: flex;
+        // flex-direction: row;
+
+        .form {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+
+            .inputs {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+    
+                label {
+                    font-family: $main-font;
+                    margin-bottom: 0.5rem;
+                }
+    
+                input {
+                    padding: 0.5rem;
+                    margin-bottom: 1rem;
+                    width: 90%;
+                    font-family: $main-font;
+                    font-weight: 600;
+                }
+            }
+    
+            .txtarea {
+                flex: 1;
+    
+                label {
+                    font-family: $main-font;
+                }
+    
+                textarea {
+                    margin-top: 0.5rem;
+                    font-family: $main-font;
+                    padding: 0.5rem;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        button {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            outline: none;
+            background-color: hsl(214, 59%, 48%);
+            border-radius: 25px;
+            color: white;
+            font-family: $main-font;
+            font-weight: 700;
+            cursor: pointer;
+            transition-property: all;
+            transition-duration: 0.3s;
+            display: flex;
+            justify-content: center;
+            text-transform: uppercase;
+            
+            &:hover {
+                background-color: hsl(214, 59%, 20%);
+            }
+        } 
+    }
+}

@@ -19,7 +19,7 @@ export const Header = () => {
     const router = useRouter()
 
     const [showMenu1, setShowMenu1] = useState(false)
-    const [showMenu2, setShowMenu2] = useState(false)
+    const [showCart, setShowCart] = useState(false)
     const { user } = useAuth() as { user: User, isLoggedIn: boolean}
 
     return (
@@ -33,7 +33,6 @@ export const Header = () => {
                 <div className={s.allproductsmain}>
                     <p 
                         onMouseOver={() => setShowMenu1(true)}
-                        // onMouseLeave={() => setShowMenu1(false)}
                     > All Products </p>
                     
                     { showMenu1 && <div
@@ -41,37 +40,29 @@ export const Header = () => {
                         onMouseLeave={() => setShowMenu1(false)}
                         className={s.allproductsdropdown}
                     >
-                        <Link href="royal-kludge-products"> Royal Kludge </Link>
-                        <Link href="red-dragon-products"> Red Dragon </Link>
-                        <Link href="ajazz-products"> Ajazz </Link>
+                        <Link href="/royal-kludge-products"> Royal Kludge </Link>
+                        <Link href="/redragon-products"> Redragon </Link>
+                        <Link href="/ducky-products"> Ducky </Link>
 
                     </div> }
                 </div>
 
-                <div className={s.categoriesmain}>
-                    <p
-                        onMouseOver={() => setShowMenu2(true)}
-                        // onMouseLeave={() => setShowMenu2(false)}
-                    > Categories </p>
-
-                    { showMenu2 && <div 
-                        onMouseOver={() => setShowMenu2(true)}
-                        onMouseLeave={() => setShowMenu2(false)}
-                        className={s.categoriesdropdown}>
-                            
-                        <Link href="mechanical"> Mechanical </Link>
-                        <Link href="membrane"> Membrane </Link>
-                        <Link href="bluetooth"> Bluetooth </Link>
-                    </div> }
-                </div>
-                {/* <p> Categories </p> */}
-                <Link href="contact"> Contact </Link>
-                <Link href="aboutus"> About Us </Link>
+                <Link href="/contact"> Contact </Link>
+                <Link href="/aboutus"> About Us </Link>
                 
             </div>
 
             <div className={s.loginregister}>
-                <Badge style={{margin: '0 2rem', cursor: 'pointer'}} badgeContent={ user ? 10 : 0 } color="primary" > <IoCartOutline size={25} color="#3373C4" /> </Badge>
+                <Badge style={{margin: '0 2rem', cursor: 'pointer'}} badgeContent={ user ? 10 : 0 } color="primary" >
+                    <div className={s.cart}>
+                        <IoCartOutline onClick={() => setShowCart(prev => !prev)} size={25} color="#3373C4" />
+                        { showCart ? <div className={s.cartShow}>
+                            <h1> safsf </h1>
+                            <h1> safsf </h1>
+                            <h1> safsf </h1>
+                        </div> : null }
+                    </div>
+                </Badge>
                 { user ? <p onClick={() => {
                     document.cookie = `KBDZToken=; path=/;`
                     // document.cookie = `KBDZAccessToken=; path=/;`

@@ -42,30 +42,10 @@ nav.navbar {
                 flex-direction: 'column';
                 justify-content: center;
                 // right: 30px;
-                background-color: whitesmoke;
-                border-radius: 3px;
-                width: max-content;
-
-                a {
-                    background-color: 'orange';
-                }
-            }
-        }
-
-        .categoriesmain {
-            position: relative;
-            display: flex;
-            justify-content: center;
-
-            .categoriesdropdown {
-                position: absolute;
-                top: 30px;
-                padding: 1rem;
-                display: flex;
-                flex-direction: 'column';
-                justify-content: center;
-                // right: 30px;
-                background-color: whitesmoke;
+                background-color: rgb(255, 255, 255);
+                box-shadow: 3px 2px 42px 6px rgba(6,6,6,0.3);
+                -webkit-box-shadow: 3px 2px 42px 6px rgba(6,6,6,0.3);
+                -moz-box-shadow: 3px 2px 42px 6px rgba(6,6,6,0.3);
                 border-radius: 3px;
                 width: max-content;
 
@@ -78,6 +58,7 @@ nav.navbar {
         p {
             font-family: $main-font;
             margin: 0 1rem;
+            font-weight: 700;
 
             &:hover {
                 cursor: pointer;
@@ -88,6 +69,7 @@ nav.navbar {
             font-family: $main-font;
             margin: 0 1rem;
             color: black;
+            font-weight: 700;
             // background-color: purple;
 
             &:hover {
@@ -101,6 +83,18 @@ nav.navbar {
         display: flex;
         align-items: center;
         justify-content: flex-end;
+
+        .cart {
+            position: relative;
+            display: flex;
+            justify-content: center;
+
+            .cartShow {
+                position: absolute;
+                background-color: red;
+                top: 30px;
+            }
+        }
 
         a, p {
             font-family: $main-font;

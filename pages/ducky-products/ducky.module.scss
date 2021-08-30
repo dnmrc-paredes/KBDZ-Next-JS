@@ -1,0 +1,45 @@
+@import '../../styles/variables.scss';
+
+main.main {
+    // background-color: red;
+    min-height: 100vh;
+    margin: 3rem 3rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        margin: 3rem 0;
+        display: flex;
+        justify-content: center;
+        
+        h1 {
+            font-family: $main-font;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+        }
+    }
+    
+    .items {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+}
+
+.itemRoot {
+    // background-color: red;
+    min-height: 100vh;
+    margin: 3rem 3rem 0 3rem;
+
+    .itemDetails {
+        // background-color: blue;
+
+        .itemImg {
+            // background-color: orange;
+            display: flex;
+            justify-content: center;
+        }
+
+    }
+
+}
