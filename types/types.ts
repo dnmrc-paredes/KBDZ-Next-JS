@@ -5,11 +5,16 @@ export interface Ikeyboard {
     weight?: string
     switches?: string
     usbConnector?: string
+    price: number
 }
 
-export interface Icart {
-    cart: [{
-        id: string
-        qty: number
-    }]
+export interface Iitem {
+    id: string | number
+    qty: number
+    price: number
+    total: number
+}
+
+export interface IrootState {
+    cart: Iitem[]
 }

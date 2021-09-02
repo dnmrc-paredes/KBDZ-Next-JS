@@ -3,6 +3,10 @@ import { User } from 'firebase/auth'
 import Modal from 'react-modal';
 import { useRouter } from "next/router";
 import { IoCartOutline } from 'react-icons/io5'
+import { useDispatch } from "react-redux";
+
+// Redux
+import { addToCart } from "../../../redux/actions/cart";
 
 // Contexts
 import { useAuth } from "../../../contexts/authContext";
@@ -18,6 +22,7 @@ export const KeyboardDetailsComp: FC<{data: Ikeyboard}> = (props) => {
 
     const { data } = props
     const router = useRouter()
+    const dispatch = useDispatch()
     const { user } = useAuth() as { user: User, isLoggedIn: boolean}
 
     const [notLoggedInModal, setNotLoggedInModal] = useState(false)
@@ -27,16 +32,17 @@ export const KeyboardDetailsComp: FC<{data: Ikeyboard}> = (props) => {
             <h1> Specifications </h1>
             <h2> {data.name} </h2>
             <ul>
+                <li> Price: <strong> ${data.price} </strong> </li>
                 <li> Switches: <strong> {data.switches} </strong> </li>
                 <li> Connectivity: <strong> {data.usbConnector} </strong> </li>
                 <li> Weight: <strong> {data.weight} </strong> </li>
             </ul>
 
             <button onClick={() => {
-                user ? null : setNotLoggedInModal(true)
+                user ? dispatch(addToCart(data.name!, data.price!)) : setNotLoggedInModal(true)
             }}> Add To Cart <IoCartOutline style={{marginLeft: '0.2rem'}} size={20} /> </button>
 
-            <Modal onRequestClose={() => setNotLoggedInModal(false)} style={{content: {
+            <Modal ariaHideApp={false} onRequestClose={() => setNotLoggedInModal(false)} style={{content: {
                 display: 'flex',
                 backgroundColor: 'white',
                 height: '200px',

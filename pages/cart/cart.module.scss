@@ -1,0 +1,139 @@
+@import '../../styles/variables.scss';
+
+main.main {
+    min-height: 100vh;
+    display: flex;
+
+    .cart {
+        margin: 3rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex: 1;
+
+        .title {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            // background-color: orangered;
+            margin-bottom: 3rem;
+
+            h1 {
+                font-family: $main-font;
+            }
+        }
+
+        .myItems {
+            flex: 4;
+            // background-color: orange;
+
+            .emptyCart {
+                display: flex;
+                justify-content: center;
+
+                p {
+                    font-family: $main-font;
+                    color: gray;
+                }
+            }
+            
+            .item {
+                // background-color: red;
+                margin: 0.2rem 0;
+                padding: 1rem;
+                
+                .itemInfo {
+                display: flex;
+                justify-content: space-between;
+
+                h1 {
+                    font-family: $main-font;
+                }
+
+                p {
+                    font-family: $main-font;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: row;
+                    align-items: center;
+
+                    span {
+                        margin-left: 1rem;
+                        font-size: 1.5rem;
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: row;
+                    }
+                }
+
+                }
+            }
+
+            .itemBtns {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                p {
+                    display: flex;
+                    justify-content: center;margin-right: 1rem;
+                    font-family: $main-font;
+                    font-weight: 600;
+                }
+
+                button {
+                    height: 30px;
+                    width: 30px;
+                    margin: 0 0.2rem;
+                    background-color: hsl(234, 59%, 48%);
+                    color: white;
+                    border: none;
+                    outline: none;
+                    transition-property: all;
+                    transition-duration: 0.5s;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: hsl(214, 59%, 20%);
+                    }
+                }
+            }
+    
+        }
+
+        .totalToPay {
+
+            h3 {
+                font-family: $main-font;
+                font-weight: 500;
+            }
+        }
+
+        .payBtns {
+            flex: 1;
+            display: flex;
+            // background-color: red;
+            align-items: flex-end;
+            // margin-top: 3rem;
+            width: 100%;
+
+            button {
+                padding: 0.5rem 1rem;
+                background-color: hsl(234, 59%, 48%);
+                border-radius: 25px;
+                color: white;
+                border: none;
+                outline: none;
+                transition-property: all;
+                transition-duration: 0.5s;
+                cursor: pointer;
+                font-family: $main-font;
+
+                &:hover {
+                    background-color: hsl(214, 59%, 20%);
+                }
+            }
+        }
+    }
+
+}

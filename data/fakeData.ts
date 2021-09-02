@@ -8,7 +8,8 @@ export const keyboardsData = [
         name: 'K530 Draconic',
         weight: '0.8 Kg',
         switches: 'Redragon Mechanical Brown Switches',
-        usbConnector: 'Detachable Type-C Cable'
+        usbConnector: 'Detachable Type-C Cable',
+        price: 32
     },
     {
         id: 2,
@@ -16,7 +17,8 @@ export const keyboardsData = [
         name: 'One 2 SF',
         weight: '635g',
         switches: 'Cherry MX mechanical switches',
-        usbConnector: 'USB 2.0'
+        usbConnector: 'USB 2.0',
+        price: 45
     },
     {
         id: 3,
@@ -24,7 +26,8 @@ export const keyboardsData = [
         name: 'RK61',
         weight: '0.5kg',
         switches: 'Red Switch',
-        usbConnector: 'Type-C Cable'
+        usbConnector: 'Type-C Cable',
+        price: 25
     },
     {
         id: 4,
@@ -32,7 +35,8 @@ export const keyboardsData = [
         name: 'Deimos K599',
         weight: '0.8 Kg',
         switches: 'Dustproof Switches (Cherry Red equivalent)',
-        usbConnector: 'Type-C Cable'
+        usbConnector: 'Type-C Cable',
+        price: 38
     },
     {
         id: 5,
@@ -40,7 +44,8 @@ export const keyboardsData = [
         name: 'RK71',
         weight: '0.64kg',
         switches: 'Brown Switch',
-        usbConnector: 'Type-C Cable'
+        usbConnector: 'Type-C Cable',
+        price: 54
     },
     {
         id: 6,
@@ -48,7 +53,8 @@ export const keyboardsData = [
         name: 'Mecha SF Emerald',
         weight: '874g',
         switches: 'Cherry MX mechanical switches',
-        usbConnector: 'USB 2.0'
+        usbConnector: 'USB 2.0',
+        price: 88
     }
     
 ] as Ikeyboard[]

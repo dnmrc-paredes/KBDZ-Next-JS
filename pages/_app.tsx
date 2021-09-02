@@ -1,7 +1,5 @@
-import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
-import { useEffect } from 'react'
-import { getAuth, onAuthStateChanged } from '@firebase/auth'
+import { PersistGate } from 'redux-persist/integration/react'
 
 // Contexts
 import { AuthProvider } from '../contexts/authContext'
@@ -12,18 +10,23 @@ import { Header } from '../components/header/header'
 import { Footer } from '../components/footer/footer'
 
 // Store
-import { store } from '../redux'
+import { store, persistor } from '../redux'
+
+// Global Styles
+import '../styles/globals.scss'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <Header/>
-        <Component {...pageProps} />
-        <Footer/>
-      </AuthProvider>
-    </Provider>
+      <PersistGate persistor={persistor}>
+        <Provider store={store}>
+          <AuthProvider>
+            <Header/>
+            <Component {...pageProps} />
+            <Footer/>
+          </AuthProvider>
+        </Provider>
+      </PersistGate>
   )
 }
 

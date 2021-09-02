@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, FC } from "react";
 import { onAuthStateChanged, User } from "@firebase/auth";
 import cookies from 'next-cookies'
+import axios from 'axios'
 
 // Firebase
 import { firebaseAuth } from "../firebase/client";
+import { firebaseAdmin } from "../firebase/server";
 
 const AuthContext = createContext({})
 
@@ -13,7 +15,7 @@ export const AuthProvider: FC = ({children}) => {
     const [theUser, setTheUser] = useState<User>()
 
     useEffect(() => {
-        const unsub = onAuthStateChanged(firebaseAuth, (user) => {
+        const unsub = onAuthStateChanged(firebaseAuth, async (user) => {
 
             if (!user || !user.emailVerified) {
                 setTheUser(undefined)

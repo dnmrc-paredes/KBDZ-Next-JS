@@ -1,0 +1,36 @@
+@import '../../../styles/variables.scss';
+
+main.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+
+    .checkoutRoot {
+        flex: 1;
+        // background-color: blue;
+
+        .title {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // background-color: orange;
+            margin: 3rem 0 5rem 0;
+            
+            h1 {
+                font-family: $main-font;
+                text-transform: uppercase;
+            }
+        }
+
+        .paypal {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // background-color: red;
+        }
+    }
+
+}
