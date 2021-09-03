@@ -15,99 +15,161 @@ main.main {
             flex: 1;
             display: flex;
             justify-content: center;
+            align-items: center;
             // background-color: orangered;
-            margin-bottom: 3rem;
+            // margin-bottom: 3rem;
 
             h1 {
-                font-family: $main-font;
-            }
-        }
-
-        .myItems {
-            flex: 4;
-            // background-color: orange;
-
-            .emptyCart {
-                display: flex;
-                justify-content: center;
-
-                p {
-                    font-family: $main-font;
-                    color: gray;
-                }
-            }
-            
-            .item {
-                // background-color: red;
-                margin: 0.2rem 0;
-                padding: 1rem;
-                
-                .itemInfo {
-                display: flex;
-                justify-content: space-between;
-
-                h1 {
-                    font-family: $main-font;
-                }
-
-                p {
-                    font-family: $main-font;
-                    display: flex;
-                    justify-content: center;
-                    flex-direction: row;
-                    align-items: center;
-
-                    span {
-                        margin-left: 1rem;
-                        font-size: 1.5rem;
-                        display: flex;
-                        justify-content: center;
-                        flex-direction: row;
-                    }
-                }
-
-                }
-            }
-
-            .itemBtns {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-
-                p {
-                    display: flex;
-                    justify-content: center;margin-right: 1rem;
-                    font-family: $main-font;
-                    font-weight: 600;
-                }
-
-                button {
-                    height: 30px;
-                    width: 30px;
-                    margin: 0 0.2rem;
-                    background-color: hsl(234, 59%, 48%);
-                    color: white;
-                    border: none;
-                    outline: none;
-                    transition-property: all;
-                    transition-duration: 0.5s;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: hsl(214, 59%, 20%);
-                    }
-                }
-            }
-    
-        }
-
-        .totalToPay {
-
-            h3 {
                 font-family: $main-font;
                 font-weight: 500;
             }
         }
+
+        .myCart {
+            flex: 4;
+            // background-color: red;
+            display: flex;
+            flex-direction: row;
+
+            .myItems {
+                flex: 2;
+                overflow-y: auto;
+                // background-color: yellow;
+                max-height: 500px;
+
+                .emptyCart {
+                    margin-top: 1rem;
+                    display: flex;
+                    justify-content: center;
+
+                    h3 {
+                        font-family: $main-font;
+                        font-weight: 500;
+                        color: gray;
+                    }
+                }
+
+                .item {
+                    padding: 1rem;
+
+                    &:hover {
+                        background-color: whitesmoke;
+                    }
+                    
+                    .itemInfo {
+                    display: flex;
+                    justify-content: space-between;
+    
+                    h1 {
+                        font-family: $main-font;
+                    }
+    
+                    p {
+                        font-family: $main-font;
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: row;
+                        align-items: center;
+    
+                        span {
+                            margin-left: 1rem;
+                            font-size: 1.5rem;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: row;
+                        }
+                    }
+    
+                    }
+                }
+
+                .itemBtns {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+    
+                    p {
+                        display: flex;
+                        justify-content: center;margin-right: 1rem;
+                        font-family: $main-font;
+                        font-weight: 600;
+                    }
+    
+                    button {
+                        height: 30px;
+                        width: 30px;
+                        margin: 0 0.2rem;
+                        background-color: transparent;
+                        color: white;
+                        border: none;
+                        outline: none;
+                        transition-property: all;
+                        transition-duration: 0.5s;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+    
+                    }
+                }
+
+            }
+
+            .checkout {
+                flex: 1;
+
+                .title {
+                    padding: 1rem 0;
+
+                    h2 {
+                        font-family: $main-font;
+                        font-weight: 500;
+                    }
+                }
+
+                .totalToPay {
+                    margin: 1rem 2rem 0 2rem;
+
+                    h3 {
+                        font-family: $main-font;
+                        font-weight: 500;
+                    }
+                }
+
+                .paypal {
+                    margin: 1rem 2rem 0 2rem;
+                }
+
+                .paymaya {
+                    margin: 1rem 2rem 0 2rem;
+                    
+                    button {
+                        height: 45px;
+                        width: 100%;
+                        background-color: green;
+                        color: white;
+                        border: none;
+                        outline: none;
+                        transition-property: all;
+                        transition-duration: 0.5s;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 5px;
+                        font-family: $main-font;
+                        font-weight: 600;
+                        letter-spacing: 1px;
+
+                        &:disabled {
+                            opacity: 0.3;
+                        }
+                    }
+                }
+            }
+
+        }
+
 
         .payBtns {
             flex: 1;

@@ -9,7 +9,7 @@ export const keyboardsData = [
         weight: '0.8 Kg',
         switches: 'Redragon Mechanical Brown Switches',
         usbConnector: 'Detachable Type-C Cable',
-        price: 32
+        price: 2300
     },
     {
         id: 2,
@@ -18,7 +18,7 @@ export const keyboardsData = [
         weight: '635g',
         switches: 'Cherry MX mechanical switches',
         usbConnector: 'USB 2.0',
-        price: 45
+        price: 4500
     },
     {
         id: 3,
@@ -27,7 +27,7 @@ export const keyboardsData = [
         weight: '0.5kg',
         switches: 'Red Switch',
         usbConnector: 'Type-C Cable',
-        price: 25
+        price: 2100
     },
     {
         id: 4,
@@ -36,7 +36,7 @@ export const keyboardsData = [
         weight: '0.8 Kg',
         switches: 'Dustproof Switches (Cherry Red equivalent)',
         usbConnector: 'Type-C Cable',
-        price: 38
+        price: 1800
     },
     {
         id: 5,
@@ -45,7 +45,7 @@ export const keyboardsData = [
         weight: '0.64kg',
         switches: 'Brown Switch',
         usbConnector: 'Type-C Cable',
-        price: 54
+        price: 2345
     },
     {
         id: 6,
@@ -54,7 +54,7 @@ export const keyboardsData = [
         weight: '874g',
         switches: 'Cherry MX mechanical switches',
         usbConnector: 'USB 2.0',
-        price: 88
+        price: 5600
     }
     
 ] as Ikeyboard[]

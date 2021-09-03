@@ -32,7 +32,7 @@ export const KeyboardDetailsComp: FC<{data: Ikeyboard}> = (props) => {
             <h1> Specifications </h1>
             <h2> {data.name} </h2>
             <ul>
-                <li> Price: <strong> ${data.price} </strong> </li>
+                <li> Price: <strong> &#8369;{data.price} </strong> </li>
                 <li> Switches: <strong> {data.switches} </strong> </li>
                 <li> Connectivity: <strong> {data.usbConnector} </strong> </li>
                 <li> Weight: <strong> {data.weight} </strong> </li>

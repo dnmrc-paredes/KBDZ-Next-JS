@@ -45,7 +45,7 @@ const RoyalKludgeProds: NextPage<{data: Ikeyboard[]}> = (props) => {
                 <div className={s.items}>
                     { data.map(item => {
                         return (
-                            <KeyboardItem id={item.id} brand={item.brand} name={item.name} key={item.id} />
+                            <KeyboardItem price={item.price} id={item.id} brand={item.brand} name={item.name} key={item.id} />
                         )
                     }) }
                 </div>

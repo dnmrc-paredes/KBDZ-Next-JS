@@ -1,5 +1,7 @@
 import type { AppProps } from 'next/app'
 import { PersistGate } from 'redux-persist/integration/react'
+import paymaya from 'paymaya-js-sdk';
+import { useEffect } from 'react';
 
 // Contexts
 import { AuthProvider } from '../contexts/authContext'
@@ -16,6 +18,10 @@ import { store, persistor } from '../redux'
 import '../styles/globals.scss'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+
+  useEffect(() => {
+    paymaya.init('pk-Z0OSzLvIcOI2UIvDhdTGVVfRSSeiGStnceqwUE7n0Ah', true)
+  }, [])
 
   return (
       <PersistGate persistor={persistor}>

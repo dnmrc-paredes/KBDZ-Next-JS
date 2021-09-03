@@ -8,8 +8,7 @@ import { rootReducer } from "./reducers/root";
 
 const persistConfig = {
     key: 'KBDZ',
-    storage,
-    whitelist: ['cart']
+    storage
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

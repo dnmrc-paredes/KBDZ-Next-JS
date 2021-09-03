@@ -88,8 +88,12 @@ nav.navbar {
             position: relative;
             display: flex;
             justify-content: center;
+            // background-color: blue;
+            // height: 200px;
 
             .cartShow {
+                // overflow: hidden;
+                overflow-y: auto;
                 position: absolute;
                 background-color: whitesmoke;
                 // background-color: rgb(255, 255, 255);
@@ -102,12 +106,28 @@ nav.navbar {
                 right: 1px;
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
+                // justify-content: flex-end;
                 padding: 1rem;
                 width: 300px;
                 max-height: 300px;
-                overflow-y: auto;
                 z-index: 10;
+
+                &::-webkit-scrollbar{
+                    width: 5px;
+                    height: 5px;
+                }
+                &::-webkit-scrollbar-thumb{
+                    background: #3373C4;
+                    border-radius: 30px;
+                }
+                &::-webkit-scrollbar-thumb:hover{
+                    background: #B3AFB3;
+                }
+                &::-webkit-scrollbar-track{
+                    background: #F0F0F0;
+                    border-radius: 0px;
+                    box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+                }
 
                 .cartItems {
                     position: relative;
@@ -135,6 +155,8 @@ nav.navbar {
                 }
 
                 button {
+                    // position: fixed;
+                    // bottom: 0;
                     margin-top: 1rem;
                     padding: 0.5rem 1.5rem;
                     border: none;

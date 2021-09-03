@@ -1,0 +1,37 @@
+@import './../../../../styles/variables.scss';
+
+.main {
+    min-height: 80vh;
+    // background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .info {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        
+        h1, p {
+            font-family: $main-font;
+        }
+
+        h1 {
+            color: #3373C4;
+        }
+
+        p {
+
+            &.cancel {
+                cursor: pointer;
+                color: black;
+                
+                &:hover {
+                    color: #3373C4;
+                }
+            }
+        }
+
+    }
+}
