@@ -36,9 +36,10 @@ export const KeyboardDetailsComp: FC<{data: Ikeyboard}> = (props) => {
                 <li> Switches: <strong> {data.switches} </strong> </li>
                 <li> Connectivity: <strong> {data.usbConnector} </strong> </li>
                 <li> Weight: <strong> {data.weight} </strong> </li>
+                <li className={s.stocks}> Stocks: <strong> {data.stocks} </strong> </li>
             </ul>
 
-            <button onClick={() => {
+            <button disabled={ data.stocks! <= 0 ? true : false } onClick={() => {
                 user ? dispatch(addToCart(data.name!, data.price!)) : setNotLoggedInModal(true)
             }}> Add To Cart <IoCartOutline style={{marginLeft: '0.2rem'}} size={20} /> </button>
 

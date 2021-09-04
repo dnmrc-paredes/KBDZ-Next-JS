@@ -3,6 +3,10 @@ import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from 'next/image'
 import Carousel from 'react-multi-carousel'
+import { doc, getDoc } from "firebase/firestore";
+
+// Firebase
+import { firebaseDB } from "../../../firebase/client";
 
 // Data
 import { keyboardsData } from "../../../data/fakeData";
@@ -28,15 +32,16 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 }
 
-export const getStaticProps: GetStaticProps = ({params}) => {
+export const getStaticProps: GetStaticProps = async ({params}) => {
 
-    const { item: keyboardName } = params as { item: string }
-    const selectedItem = keyboardsData.filter(item => item.name?.toLowerCase() === keyboardName)[0]
+    const docRef = doc(firebaseDB, "keyboards", params!.item as string);
+    const docSnap = await getDoc(docRef);
 
     return {
         props: {
-            data: selectedItem
-        }
+            data: docSnap.data() as Ikeyboard
+        },
+        revalidate: 10
     }
 
 }

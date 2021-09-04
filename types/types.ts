@@ -1,4 +1,5 @@
 export interface Ikeyboard {
+    uid?: string
     id: number | string
     brand?: string
     name?: string
@@ -6,6 +7,7 @@ export interface Ikeyboard {
     switches?: string
     usbConnector?: string
     price: number
+    stocks?: number
 }
 
 export interface Iitem {

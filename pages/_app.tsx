@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 // Contexts
 import { AuthProvider } from '../contexts/authContext'
+import { DataProvider } from '../contexts/keyboardDatasContext';
 import { Provider } from 'react-redux'
 
 // Components
@@ -27,9 +28,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <PersistGate persistor={persistor}>
         <Provider store={store}>
           <AuthProvider>
-            <Header/>
-            <Component {...pageProps} />
-            <Footer/>
+            <DataProvider>
+              <Header/>
+              <Component {...pageProps} />
+              <Footer/>
+            </DataProvider>
           </AuthProvider>
         </Provider>
       </PersistGate>

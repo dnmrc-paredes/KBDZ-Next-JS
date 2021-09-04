@@ -29,6 +29,12 @@
             list-style: none;
             margin-top: 0.3rem;
             // font-size: 1.2rem;
+
+            &.stocks {
+                text-transform: uppercase;
+                font-size: 1rem;
+                margin-top: 2rem;
+            }
         }
     }
     
@@ -47,6 +53,10 @@
         transition-duration: 0.3s;
         display: flex;
         justify-content: center;
+
+        &:disabled {
+            opacity: 0.5;
+        }
         
         &:hover {
             background-color: hsl(214, 59%, 20%);

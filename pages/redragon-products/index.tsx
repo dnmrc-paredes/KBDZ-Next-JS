@@ -2,11 +2,11 @@ import React from "react";
 import Head from 'next/head'
 import { GetStaticProps, NextPage } from 'next'
 
+// Contexts
+import { useKeyboardData } from "../../contexts/keyboardDatasContext";
+
 // Components
 import { KeyboardItem } from "../../components/reusable/itemCard/itemCard";
-
-// Data
-import { keyboardsData } from "../../data/fakeData";
 
 // Types
 import { Ikeyboard } from "../../types/types";
@@ -14,21 +14,10 @@ import { Ikeyboard } from "../../types/types";
 // Styles
 import s from './redragon.module.scss'
 
-export const getStaticProps: GetStaticProps = () => {
+const RedragonProds: NextPage = () => {
 
-    const filteredProds = keyboardsData.filter(item => item.brand === 'Redragon')
-
-    return {
-        props: {
-            data: filteredProds
-        }
-    }
-
-}
-
-const RedragonProds: NextPage<{data: Ikeyboard[]}> = (props) => {
-
-    const { data } = props
+    const { data } = useKeyboardData() as {data: Ikeyboard[]}
+    const filteredData = data.filter(item => item.brand === 'Redragon')
 
     return (
         <div>
@@ -43,9 +32,9 @@ const RedragonProds: NextPage<{data: Ikeyboard[]}> = (props) => {
                 </div>
 
                 <div className={s.items}>
-                    { data.map(item => {
+                    { filteredData.map(item => {
                         return (
-                            <KeyboardItem price={item.price} id={item.id} brand={item.brand} name={item.name} key={item.id} />
+                            <KeyboardItem uid={item.uid} price={item.price} id={item.id} brand={item.brand} name={item.name} key={item.id} />
                         )
                     }) }
                 </div>

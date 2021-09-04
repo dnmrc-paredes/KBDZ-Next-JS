@@ -1,7 +1,7 @@
 import { Iitem } from "../types/types";
 
 // Classes
-import { CartItem } from "../classes/item";
+import { CartItem } from "../classes/cartItem";
 
 export const addItem = (items: Iitem[], toBeAdded: { id: string | number, price: number }) => {
 

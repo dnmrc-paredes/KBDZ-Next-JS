@@ -11,8 +11,8 @@ import { createInvoice, download } from 'easyinvoice';
 import paymaya from 'paymaya-js-sdk';
 import axios from "axios";
 
-
 // Firebase
+import { firebaseDB } from "../../firebase/client";
 import { firebaseAdmin } from "../../firebase/server";
 
 // Utils
@@ -60,6 +60,8 @@ const Cart = () => {
     const total = useSelector((state: IrootState) => state.cart).reduce((accu, curr) => {
         return accu+=curr.total
     }, 0)
+
+    // const keyboardsRef = doc()
 
     return (
         <div>
@@ -187,6 +189,23 @@ const Cart = () => {
                                     window.open(redirectUrl, '_blank')
                                 }}> Paymaya </button>
                             </div>
+
+                            {/* <button onClick={async () => {
+
+                                try {
+
+                                    const docRef = await addDoc(collection(firebaseDB, 'keyboards'), {
+                                        name: 'hello',
+                                        email: 'gago'
+                                    })
+                                    
+                                    console.log(docRef)
+                                    
+                                } catch (err) {
+                                    console.log(err)
+                                }
+
+                            }}> Sample Firestore </button> */}
 
                         </div>
 

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { IoCartOutline } from 'react-icons/io5'
 import { Badge } from '@material-ui/core';
 import { useSelector } from "react-redux";
+import { collection, addDoc } from "firebase/firestore"; 
 
 // Context
 import { useAuth } from "../../contexts/authContext";
@@ -17,6 +18,9 @@ import s from './header.module.scss'
 
 // Firebase
 import { firebaseAuth } from "../../firebase/client";
+import { firebaseDB } from "../../firebase/client";
+
+import { keyboardsData } from "../../data/fakeData";
 
 export const Header = () => {
 
@@ -30,6 +34,27 @@ export const Header = () => {
     const [showMenu1, setShowMenu1] = useState(false)
     const [showCart, setShowCart] = useState(false)
     const { user } = useAuth() as { user: User, isLoggedIn: boolean}
+
+    const logout = async () => {
+
+        document.cookie = `KBDZToken=; path=/;`
+        signOut(firebaseAuth)
+        router.push('/shop')
+
+        // console.log(firebaseAuth!.currentUser?.uid)
+        // console.log(items)
+
+        // try {
+
+        //     const docRef = await addDoc(collection(firebaseDB, 'keyboards'), keyboardsData[5])
+            
+        //     console.log(docRef)
+            
+        // } catch (err) {
+        //     console.log(err)
+        // }
+
+    }
 
     return (
         <nav className={s.navbar}>
@@ -90,11 +115,7 @@ export const Header = () => {
                         </div> : null }
                     </div>
                 </Badge>
-                { user ? <p onClick={() => {
-                    document.cookie = `KBDZToken=; path=/;`
-                    signOut(firebaseAuth)
-                    router.push('/shop  ')
-                }}> Logout </p> : <p>
+                { user ? <p onClick={logout}> Logout </p> : <p>
                     <Link href="/login"> Login </Link> / <Link href="/register"> Register </Link>
                 </p> }
             </div>
