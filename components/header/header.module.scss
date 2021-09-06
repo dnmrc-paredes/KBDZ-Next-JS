@@ -184,5 +184,20 @@ nav.navbar {
             font-family: $main-font;
             cursor: pointer;
         }
+
+        .userImgRoot {
+            position: relative;
+
+            .userImg {
+                border-radius: 25px;
+            }
+
+            .userImgList {
+                position: absolute;
+                background-color: red;
+                height: 100px;
+                z-index: 7;
+            }
+        }
     }
 }

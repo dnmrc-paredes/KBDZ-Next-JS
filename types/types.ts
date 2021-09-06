@@ -1,3 +1,8 @@
+import { AnyAction } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
+
+export type thunkDis = ThunkDispatch<IrootState, null, AnyAction>
+
 export interface Ikeyboard {
     uid?: string
     id: number | string

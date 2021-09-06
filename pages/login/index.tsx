@@ -1,17 +1,20 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { GetServerSideProps, NextPage, GetStaticProps } from "next";
+import React, { useState, ChangeEvent} from "react";
+import { GetServerSideProps, NextPage } from "next";
 import Head from 'next/head'
 import { useRouter } from "next/dist/client/router";
 import { FcGoogle } from 'react-icons/fc'
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, User } from "@firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "@firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
 import cookies from 'next-cookies'
-// import { useAuthState } from 'react-firebase-hooks/auth';
+import { useDispatch } from "react-redux";
 
 // Firebase
 import { firebaseAuth } from "../../firebase/client";
 import { firebaseAdmin } from "../../firebase/server";
+
+// Redux
+import { loadCart } from "../../redux/actions/cart";
 
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
@@ -36,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         }
         
     } catch (err) {
-        console.log(err.code)
+        console.log(err)
     }
 
     return {
@@ -48,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 const Login: NextPage = () => {
 
     const router = useRouter()
+    const dispatch = useDispatch()
     // const [user, loading, error] = useAuthState(firebaseAuth) as [ user: User, loading: boolean, error: any ]
     const [userInput, setUserInput] = useState({
         email: "",
@@ -66,9 +70,8 @@ const Login: NextPage = () => {
 
             const token = await user.user.getIdToken()
             document.cookie = `KBDZToken=${token}; path=/;`
+            dispatch(loadCart(user.user.uid))
             router.push('/shop')
-
-            console.log(user.user.getIdToken)
 
         }).catch(err => {
             const msg = err.message
@@ -96,22 +99,22 @@ const Login: NextPage = () => {
         signInWithPopup(firebaseAuth, provider)
             .then(async (result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result)
+                // const credential = GoogleAuthProvider.credentialFromResult(result)
                 const token = await result.user.getIdToken()
-                
                 document.cookie = `KBDZToken=${token}; path=/;`
-                router.push('/shop')
                 // document.cookie = `KBDZAccessToken=${accessToken}; path=/;`
+                dispatch(loadCart(result.user.uid))
+                router.push('/shop')
 
                 // ...
             }).catch(error => {
                 // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                // const errorCode = error.code;
+                // const errorMessage = error.message;
                 // The email of the user's account used.
-                const email = error.email;
+                // const email = error.email;
                 // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
+                // const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
         })
 
@@ -123,22 +126,23 @@ const Login: NextPage = () => {
         signInWithPopup(firebaseAuth, provider)
             .then(async result => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = FacebookAuthProvider.credentialFromResult(result);
+                // const credential = FacebookAuthProvider.credentialFromResult(result);
                 const token = await result.user.getIdToken()
                 // The signed-in user info.
                 const user = result.user;
-                console.log(credential)
+                // console.log(credential)
                 document.cookie = `KBDZToken=${token}; path=/;`
+                dispatch(loadCart(user.uid))
                 router.push('/shop')
                 // ...
             }).catch(error => {
                 // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                // const errorCode = error.code;
+                // const errorMessage = error.message;
                 // The email of the user's account used.
-                const email = error.email;
+                // const email = error.email;
                 // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
+                // const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
         })
 
