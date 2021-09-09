@@ -40,8 +40,6 @@ export const Header = () => {
     const [showMenu, setShowMenu] = useState(false)
     const { user } = useAuth() as { user: User, isLoggedIn: boolean}
 
-    console.log(user)
-
     const logout = async () => {
 
         dispatch(clearCart(firebaseAuth!.currentUser!.uid, items))
@@ -110,11 +108,10 @@ export const Header = () => {
                 </Badge>
 
                 { user ? <div className={s.userImgRoot}>
-                    <Image onClick={() => setShowMenu(prev => !prev)} className={s.userImg} placeholder="blur" blurDataURL={blurUrl} height={40} width={40} src={user.photoURL!} alt="sdafasdf" />
+                    <Image onClick={() => setShowMenu(prev => !prev)} className={s.userImg} height={35} width={35} src={user.photoURL!} alt="sdafasdf" />
                     { showMenu && <div className={s.userImgList}>
-                        <p> Profile </p>
-                        <p> History </p>
-                        <p> Logout </p>
+                        <p onClick={() => router.push('/purchasehistory')}> Purchase History </p>
+                        <p onClick={logout}> Logout </p>
                     </div> }
                 </div> : <p>
                     <Link href="/login"> Login </Link> / <Link href="/register"> Register </Link>

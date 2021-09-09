@@ -46,3 +46,25 @@ export type Tpaymaya = {
     checkoutId: string
     redirectUrl: string
 }
+
+export type TpaymayaCheckout = {
+    id: string
+    items: [
+        {
+            name: string
+            quantity: string
+            totalAmount: {
+                value: number
+            }
+        }
+    ]
+    createdAt: string
+    updatedAt: string
+    status: 'CREATED' | 'COMPLETED'
+    paymentStatus: 'PENDING_TOKEN' | 'PAYMENT_SUCCESS'
+    totalAmount: {
+        amount: string
+        serviceCharge: string
+        shippingFee: string
+    }
+}

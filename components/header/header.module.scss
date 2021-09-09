@@ -190,13 +190,21 @@ nav.navbar {
 
             .userImg {
                 border-radius: 25px;
+                cursor: pointer;
             }
 
             .userImgList {
                 position: absolute;
-                background-color: red;
-                height: 100px;
+                background-color: whitesmoke;
                 z-index: 7;
+                padding: 1rem 1.5rem;
+                right: 10px;
+                width: 250px;
+
+                p {
+                    font-family: $main-font;
+                    margin-top: 0.2rem;
+                }
             }
         }
     }

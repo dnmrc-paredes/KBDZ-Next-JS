@@ -8,12 +8,11 @@ import { toast, ToastContainer } from "react-toastify";
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5'
 import { createInvoice, download } from 'easyinvoice';
-import paymaya from 'paymaya-js-sdk';
+// import paymaya from 'paymaya-js-sdk';
 import axios from "axios";
 
 // Firebase
-import { firebaseDB } from "../../firebase/client";
-import { firebaseAdmin } from "../../firebase/server";
+// import { firebaseDB } from "../../firebase/client";
 
 // Utils
 import { invoiceData } from "../../utils/easyinvoice";
@@ -54,6 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const Cart = () => {
 
+    const router = useRouter()
     const dispatch = useDispatch()
     // const router = useRouter()
     const items = useSelector((state: IrootState) => state.cart)
@@ -122,7 +122,10 @@ const Cart = () => {
                                 <PayPalScriptProvider options={options}>
                                     <PayPalButtons
                                         disabled={items.length <= 0}
-                                        createOrder={(data, actions) => {
+                                        style={{
+                                            layout: 'horizontal'
+                                        }}
+                                        createOrder={(_data, actions) => {
                                             return actions.order.create({
                                                 purchase_units: [
                                                     {
@@ -135,7 +138,7 @@ const Cart = () => {
                                                 ]
                                             })
                                         }}
-                                        onApprove={(data, actions) => {
+                                        onApprove={(_data, actions) => {
                                             return actions.order.capture().
                                             then(async res => {
                                                 toast('Payment Success.', { type: 'success' })
@@ -151,7 +154,37 @@ const Cart = () => {
 
                             <div className={s.paymaya}>
                                 <button disabled={items.length <= 0} onClick={async () => {
-                                    const checkoutObj = await paymaya.createCheckout({
+                                    // await paymaya.createCheckout({
+                                    //     totalAmount: {
+                                    //         value: total + 30,
+                                    //         currency: 'PHP',
+                                    //         details: {
+                                    //             discount: 0,
+                                    //             serviceCharge: 10,
+                                    //             shippingFee: 20,
+                                    //             tax: 0,
+                                    //             subtotal: 0
+                                    //         },
+                                    //     },
+                                    //     items: items.map(cartItem => {
+                                    //         return {
+                                    //             name: cartItem.id.toString(),
+                                    //             quantity: cartItem.qty,
+                                    //             totalAmount: {
+                                    //                 value: cartItem.total
+                                    //             }
+                                    //         }
+                                    //     }),
+                                    //     redirectUrl: {
+                                    //         cancel: 'http://localhost:3000/checkout/payment/status/cancel',
+                                    //         failure: 'http://localhost:3000/checkout/payment/status/failure',
+                                    //         success: 'http://localhost:3000/checkout/payment/status/success'
+                                    //     },
+                                    //     requestReferenceNumber: '000141386713',
+                                    //     metadata: {}
+                                    // })
+
+                                    const checkoutObj = {
                                         totalAmount: {
                                             value: total + 30,
                                             currency: 'PHP',
@@ -173,39 +206,27 @@ const Cart = () => {
                                             }
                                         }),
                                         redirectUrl: {
-                                            cancel: 'http://localhost:3000/checkout/payment/status/cancel',
-                                            failure: 'http://localhost:3000/checkout/payment/status/failure',
-                                            success: 'http://localhost:3000/checkout/payment/status/success'
+                                            cancel: 'http://localhost:3000/checkout/payment/status/',
+                                            failure: 'http://localhost:3000/checkout/payment/status/',
+                                            success: 'http://localhost:3000/checkout/payment/status/'
                                         },
                                         requestReferenceNumber: '000141386713',
                                         metadata: {}
-                                    })
-                                    const { data: { redirectUrl } } = await axios.post<Tpaymaya>('https://pg-sandbox.paymaya.com/checkout/v1/checkouts', checkoutObj, {
+                                    }
+
+                                    const { data } = await axios.post<Tpaymaya>('https://pg-sandbox.paymaya.com/checkout/v1/checkouts', checkoutObj, {
                                         headers: {
                                             'Content-Type': 'application/json',
                                             'Authorization': 'Basic cGstWjBPU3pMdkljT0kyVUl2RGhkVEdWVmZSU1NlaUdTdG5jZXF3VUU3bjBBaDo='
                                         }
                                     })
-                                    window.open(redirectUrl, '_blank')
-                                }}> Paymaya </button>
+
+                                    document.cookie = `checkoutID=${data.checkoutId}; path=/;`
+                                    window.open(data.redirectUrl, '_self')
+                                    // router.push(`checkout/payment/status/${data.checkoutId}`)
+                                    
+                                }}> Checkout </button>
                             </div>
-
-                            {/* <button onClick={async () => {
-
-                                try {
-
-                                    const docRef = await addDoc(collection(firebaseDB, 'keyboards'), {
-                                        name: 'hello',
-                                        email: 'gago'
-                                    })
-                                    
-                                    console.log(docRef)
-                                    
-                                } catch (err) {
-                                    console.log(err)
-                                }
-
-                            }}> Sample Firestore </button> */}
 
                         </div>
 

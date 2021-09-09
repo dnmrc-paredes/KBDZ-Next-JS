@@ -22,6 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => {
     paymaya.init('pk-Z0OSzLvIcOI2UIvDhdTGVVfRSSeiGStnceqwUE7n0Ah', true)
+    // paymaya.init('pk-MOfNKu3FmHMVHtjyjG7vhr7vFevRkWxmxYL1Yq6iFk5', true)
   }, [])
 
   return (
@@ -40,3 +41,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 }
 
 export default MyApp
+
