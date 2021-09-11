@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GetServerSideProps } from "next";
 import cookies from 'next-cookies'
 import Head from 'next/head'
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5'
@@ -53,15 +53,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const Cart = () => {
 
-    const router = useRouter()
-    const dispatch = useDispatch()
     // const router = useRouter()
+    const dispatch = useDispatch()
     const items = useSelector((state: IrootState) => state.cart)
     const total = useSelector((state: IrootState) => state.cart).reduce((accu, curr) => {
         return accu+=curr.total
     }, 0)
-
-    // const keyboardsRef = doc()
 
     return (
         <div>
@@ -154,35 +151,6 @@ const Cart = () => {
 
                             <div className={s.paymaya}>
                                 <button disabled={items.length <= 0} onClick={async () => {
-                                    // await paymaya.createCheckout({
-                                    //     totalAmount: {
-                                    //         value: total + 30,
-                                    //         currency: 'PHP',
-                                    //         details: {
-                                    //             discount: 0,
-                                    //             serviceCharge: 10,
-                                    //             shippingFee: 20,
-                                    //             tax: 0,
-                                    //             subtotal: 0
-                                    //         },
-                                    //     },
-                                    //     items: items.map(cartItem => {
-                                    //         return {
-                                    //             name: cartItem.id.toString(),
-                                    //             quantity: cartItem.qty,
-                                    //             totalAmount: {
-                                    //                 value: cartItem.total
-                                    //             }
-                                    //         }
-                                    //     }),
-                                    //     redirectUrl: {
-                                    //         cancel: 'http://localhost:3000/checkout/payment/status/cancel',
-                                    //         failure: 'http://localhost:3000/checkout/payment/status/failure',
-                                    //         success: 'http://localhost:3000/checkout/payment/status/success'
-                                    //     },
-                                    //     requestReferenceNumber: '000141386713',
-                                    //     metadata: {}
-                                    // })
 
                                     const checkoutObj = {
                                         totalAmount: {
@@ -223,9 +191,8 @@ const Cart = () => {
 
                                     document.cookie = `checkoutID=${data.checkoutId}; path=/;`
                                     window.open(data.redirectUrl, '_self')
-                                    // router.push(`checkout/payment/status/${data.checkoutId}`)
                                     
-                                }}> Checkout </button>
+                                }}> Pay with Paymaya </button>
                             </div>
 
                         </div>

@@ -1,11 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, FC } from "react";
 import { onAuthStateChanged, User } from "@firebase/auth";
-import cookies from 'next-cookies'
-import axios from 'axios'
 
 // Firebase
 import { firebaseAuth } from "../firebase/client";
-import { firebaseAdmin } from "../firebase/server";
 
 const AuthContext = createContext({})
 

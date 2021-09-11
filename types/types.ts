@@ -61,7 +61,7 @@ export type TpaymayaCheckout = {
     createdAt: string
     updatedAt: string
     status: 'CREATED' | 'COMPLETED'
-    paymentStatus: 'PENDING_TOKEN' | 'PAYMENT_SUCCESS'
+    paymentStatus: 'PENDING_TOKEN' | 'PAYMENT_SUCCESS' | 'PAYMENT_FAILED'
     totalAmount: {
         amount: string
         serviceCharge: string

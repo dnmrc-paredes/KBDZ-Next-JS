@@ -44,6 +44,7 @@ export const Header = () => {
 
         dispatch(clearCart(firebaseAuth!.currentUser!.uid, items))
         document.cookie = `KBDZToken=; path=/;`
+        document.cookie = `KBDZRefreshToken=; path=/;`
 
     }
 

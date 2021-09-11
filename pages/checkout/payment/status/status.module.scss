@@ -12,7 +12,7 @@
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        background-color: red;
+        // background-color: red;
         padding: 1rem;
         
         h1, p {
@@ -36,8 +36,46 @@
         }
 
         .otherInfo {
-            background-color: yellow;
+            // background-color: yellow;
+            margin-top: 1rem;
+
+            .paymentID {
+                font-family: $main-font;
+                font-weight: 700;
+            }
+
+            .items {
+                margin: 0.5rem 0;
+            }
+
+            .item {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .totalAmount {
+                display: flex;
+                justify-content: flex-end;
+            }
         }
   
     }
+}
+
+.main2 {
+    min-height: 80vh;
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1, p {
+        font-family: $main-font;
+    }
+
+    h1 {
+        color: #3373C4;
+    }
+
 }

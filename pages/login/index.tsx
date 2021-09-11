@@ -101,7 +101,10 @@ const Login: NextPage = () => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 // const credential = GoogleAuthProvider.credentialFromResult(result)
                 const token = await result.user.getIdToken()
+                const refreshToken = result.user.refreshToken
                 document.cookie = `KBDZToken=${token}; path=/;`
+                document.cookie = `KBDZRefreshToken=${refreshToken}; path=/;`
+                result.user.refreshToken
                 // document.cookie = `KBDZAccessToken=${accessToken}; path=/;`
                 dispatch(loadCart(result.user.uid))
                 router.push('/shop')
