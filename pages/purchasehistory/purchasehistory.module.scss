@@ -2,5 +2,88 @@
 
 main.main {
     min-height: 85vh;
+    display: flex;
+    // justify-content: center;
+    // align-items: center;
+    flex-direction: column;
+    // background-color: red;
 
+    .title {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+
+        h1 {
+            font-family: $main-font;
+            text-transform: uppercase;
+        }
+    }
+
+    .items {
+        margin-top: 3rem;
+
+        .item {
+            padding: 1rem;
+            margin: 0.2rem 1rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: whitesmoke;
+            }
+
+            li {
+                font-family: $main-font;
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+}
+
+main.main2 {
+    // background-color: red;
+    min-height: 80vh;
+    display: flex;
+
+    .purchaseInfo {
+        margin: 3rem 3rem 0 3rem;
+
+        h1 {
+            font-family: $main-font;
+        }
+
+        .items {
+            margin-top: 3rem;
+
+            .item {
+                display: flex;
+                // background-color: blue;
+                flex-direction: column;
+    
+                .itemInfo {
+                    // background-color: yellow;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 0.5rem;
+                    align-items: center;
+
+                    h2, p {
+                        font-family: $main-font;
+                    }
+
+                }
+
+                .itemAmount {
+                    display: flex;
+                    justify-content: flex-end;
+                    
+                    p {
+                        font-family: $main-font;
+                    }
+                }
+            }
+
+        }
+
+    }
 }

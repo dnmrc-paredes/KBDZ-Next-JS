@@ -8,18 +8,23 @@ import { useUnmount } from 'react-use'
 import { doc, setDoc } from "firebase/firestore"; 
 
 // Firebase
-import { firebaseDB, firebaseAuth } from "../../../../firebase/client";
+import { firebaseDB } from "../../../../firebase/client";
 import { firebaseAdmin } from "../../../../firebase/server";
+
+// Utils
+import { refreshToken } from "../../../../utils/refreshToken";
+
+// Types
+import { TpaymayaCheckout } from "../../../../types/types";
 
 // Styles
 import s from './status.module.scss'
-import { TpaymayaCheckout } from "../../../../types/types";
 
 const commaNumber = require('comma-number')
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
-    const { checkoutID, KBDZToken, KBDZRefreshToken } = cookies(ctx) as { checkoutID: string, KBDZToken: string, KBDZRefreshToken: string }
+    const { checkoutID, KBDZRefreshToken } = cookies(ctx) as { checkoutID: string, KBDZToken: string, KBDZRefreshToken: string }
 
     if (!checkoutID) {
         return {
@@ -36,7 +41,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const savedPurchase = async () => {
 
-        const { uid } = await firebaseAdmin.verifyIdToken(KBDZToken)
+        const idToken = await refreshToken(KBDZRefreshToken)
+        const { uid } = await firebaseAdmin.verifyIdToken(idToken)
 
         if (data.paymentStatus === 'PAYMENT_SUCCESS') {
             await setDoc(doc(firebaseDB, 'purchases', data.id), {
@@ -49,25 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     }
 
-    // console.log(KBDZRefreshToken)
-    await savedPurchase()
-
-    // const data2 = await fetch(`https://securetoken.googleapis.com/v1/token?key=${process.env.FIREBASE_WEB_ID}`, {
-    //     body: `grant_type=refresh_token&refresh_token=${KBDZRefreshToken}`,
-    //     headers: {
-    //         "Content-Type": "application/x-www-form-urlencoded"
-    //     },
-    //     method: "POST"
-    // })
-
-    const data3 = await axios.post(`https://securetoken.googleapis.com/v1/token?key=${process.env.FIREBASE_WEB_ID}`,
-        `grant_type=refresh_token&refresh_token=${KBDZRefreshToken}`, {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
-    })
-        
-    console.log(data3)    
+    await savedPurchase()    
 
     return {
         props: { data }
@@ -114,7 +102,7 @@ const Success: NextPage<{data: TpaymayaCheckout}> = ({data}) => {
 
                     <div className={s.otherInfo}>
                         <p className={s.paymentID}> Payment ID: {data.id} </p>
-                        <p className={s.items}> Items </p>
+                        <p className={s.items}> Items: </p>
                         {data.items.map(item => {
                             return <div className={s.item} key={item.name}>
                                 <p> {item.name} </p>

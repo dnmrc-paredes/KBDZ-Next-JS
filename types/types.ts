@@ -68,3 +68,25 @@ export type TpaymayaCheckout = {
         shippingFee: string
     }
 }
+
+export interface Ipurchases {
+    items: [{
+        name: string
+        quantity: string
+        totalAmount: {
+            value: string
+        }
+    }]
+    paymentID: string
+    purchasedBy: string
+    totalAmount: {
+        amount: string
+        currency: string
+        details: {
+            discount: string
+            serviceCharge: string
+            subTotal: string
+            tax: string
+        }
+    }
+}

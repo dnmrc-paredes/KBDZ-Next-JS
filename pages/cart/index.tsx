@@ -189,6 +189,7 @@ const Cart = () => {
                                         }
                                     })
 
+                                    dispatch(sucessBuyClear())
                                     document.cookie = `checkoutID=${data.checkoutId}; path=/;`
                                     window.open(data.redirectUrl, '_self')
                                     

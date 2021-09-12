@@ -69,7 +69,9 @@ const Login: NextPage = () => {
             }
 
             const token = await user.user.getIdToken()
+            const refreshToken = user.user.refreshToken
             document.cookie = `KBDZToken=${token}; path=/;`
+            document.cookie = `KBDZRefreshToken=${refreshToken}; path=/;`
             dispatch(loadCart(user.user.uid))
             router.push('/shop')
 
@@ -131,10 +133,12 @@ const Login: NextPage = () => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 // const credential = FacebookAuthProvider.credentialFromResult(result);
                 const token = await result.user.getIdToken()
+                const refreshToken = result.user.refreshToken
                 // The signed-in user info.
                 const user = result.user;
                 // console.log(credential)
                 document.cookie = `KBDZToken=${token}; path=/;`
+                document.cookie = `KBDZRefreshToken=${refreshToken}; path=/;`
                 dispatch(loadCart(user.uid))
                 router.push('/shop')
                 // ...
