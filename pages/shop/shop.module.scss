@@ -55,7 +55,7 @@
 
         h1 {
             font-family: $main-font;
-            margin: 0 8rem;
+            margin: 0 8vw;
             font-weight: 800;
             margin-bottom: 0.5rem;
         }
@@ -64,7 +64,7 @@
             font-family: $main-font;
             // font-weight: 300;
             font-weight: 500;
-            margin: 0 8rem;
+            margin: 0 8vw;
         }
     }
 
@@ -97,7 +97,7 @@
 
         h1 {
             font-family: $main-font;
-            margin: 0 8rem;
+            margin: 0 8vw;
             font-weight: 800;
             margin-bottom: 0.5rem;
         }
@@ -106,7 +106,7 @@
             font-family: $main-font;
             // font-weight: 300;
             font-weight: 500;
-            margin: 0 8rem;
+            margin: 0 8vw;
         }
     }
 
@@ -124,36 +124,6 @@
         }
     }
 }
-
-// .shopInfo {
-//     // background-color: red;
-//     display: flex;
-//     justify-content: space-around;
-//     align-items: center;
-//     height: 300px;
-
-//     .items {
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: center;
-//         align-items: center;
-
-//         h1 {
-//             font-family: $main-font;
-//             font-size: 2.5rem;
-//             color: red;
-//         }
-    
-//         p {
-//             margin-top: 1rem;
-//             font-family: $main-font;
-//             font-weight: 600;
-//             font-size: 1.2rem;
-//         }
-
-//     }
-
-// }
 
 .threeTiles {
     // margin: 3rem 3rem 0 3rem;
@@ -176,7 +146,8 @@
 
             &:hover::before {
                 position: absolute;
-                content: "Switches";
+                // content: "Switches";
+                content: "";
                 font-family: $main-font;
                 font-weight: 800;
                 font-size: 4rem;
@@ -218,7 +189,8 @@
 
             &:hover::before {
                 position: absolute;
-                content: "Keycaps";
+                // content: "Keycaps";
+                content: "";
                 font-family: $main-font;
                 font-weight: 800;
                 font-size: 4rem;
@@ -259,7 +231,8 @@
 
         &:hover::before {
             position: absolute;
-            content: "Custom Build";
+            // content: "Custom Build";
+            content: "";
             font-family: $main-font;
             font-weight: 800;
             font-size: 6rem;
@@ -289,53 +262,152 @@
 }
 
 .newsletter {
-    // background-color: red;
     height: 300px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     padding: 0 3rem;
     // border-top: gray solid 1px;
     // background-color: whitesmoke;
     // border-width: 2px;
 
-    h1 {
-        margin-bottom: 0.5rem;
-        font-family: $main-font;
-        font-weight: 800;
-        text-align: center;
-        // color: white;
-    }
+    form {
+        // background-color: red;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-    label {
-        // margin-right: 1rem;
-        font-family: $main-font;
-        font-weight: 600;
-        // color: white;
-    }
-
-    input {
-        margin: 0 0.5rem;
-        padding: 0.5rem;
-        width: 300px;
-        font-family: $main-font;
-        font-weight: 600;
-        border-radius: 5px;
-        border: solid black 4px;
-    }
-
-    button {
-        padding: 0.5rem 1rem;
-        border: none;
-        outline: none;
-        background-color: white;
-        border: #3373C4 solid 4px;
-        font-family: $main-font;
-        color: #3373C4;
-        font-weight: 800;
-        text-transform: uppercase;
-        border-radius: 5px;
-        cursor: pointer;
+        h1 {
+            margin-bottom: 0.5rem;
+            font-family: $main-font;
+            font-weight: 800;
+            text-align: center;
+            // color: white;
+        }
+    
+        label {
+            // margin-right: 1rem;
+            font-family: $main-font;
+            font-weight: 600;
+            // color: white;
+        }
+    
+        input {
+            margin: 0 0.5rem;
+            padding: 0.5rem;
+            width: 300px;
+            font-family: $main-font;
+            font-weight: 600;
+            // border-radius: 5px;
+            // border: solid black 4px;
+        }
+    
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            outline: none;
+            background-color: white;
+            border: #3373C4 solid 2px;
+            font-family: $main-font;
+            color: #3373C4;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+            transition-property: all;
+            transition-duration: 0.5s;
+            
+            &:hover {
+                border: transparent solid 2px;
+                background-color: #3373C4;
+                color: white;
+            }
+        }
     }
 
 }
+
+@media screen and (max-width: 700px) {
+
+    .carousel {
+        margin: 3rem 0 0 0;
+    }
+
+    .membraneSection {
+        flex-direction: column;
+        // background-color: blue;
+        padding: 2rem 0;
+
+        .membraneImg {
+            // background-color: red;
+            margin: 0 1rem;
+        }
+    }
+
+    .mechSection {
+        flex-direction: column;
+        // background-color: red;
+        padding: 2rem 0;
+
+        .mechInfo {
+            order: 1;
+        }
+    }
+
+    .newsletter {
+        // background-color: red;
+        // flex-direction: column;
+        padding: 0;
+
+        form {
+            // background-color: red;
+            width: 100%;
+            margin: 0 0.5rem;
+
+            .inputForm {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                input {
+                    margin: 0;
+                    margin-top: 0.5rem;
+                    width: 95%;
+                }
+
+                button {
+                    margin-top: 0.5rem;
+                    width: 130px;
+                }
+            }
+        }
+
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+
+    .threeTiles {
+
+        .tileBox {
+            flex-direction: column;
+        }
+    }
+
+}
+
+// @media screen and (max-width: 600px) {
+
+//     .newsletter {
+//         // background-color: red;
+//         flex-direction: column;
+
+//         input {
+//             margin: 0;
+//         }
+
+//     }
+
+// }

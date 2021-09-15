@@ -13,12 +13,12 @@ main.main {
         min-height: 90vh;
         flex-direction: column;
         margin: 0 auto;
-        width: 30%;
+        max-width: 300px;
 
         h1 {
             font-family: $main-font;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-size: 2.5rem;
         }
 
@@ -28,7 +28,7 @@ main.main {
 
         input {
             margin: 0.5rem 0;
-            padding: 0.8rem;
+            padding: 0.5rem;
             font-size: 1.2rem;
             font-family: $main-font;
         }

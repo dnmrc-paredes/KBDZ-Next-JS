@@ -35,7 +35,7 @@ const Contact = () => {
                         </div>
                         <div className={s.txtarea}>
                             <label htmlFor="msg"> Message </label>
-                            <textarea name="" cols={100} rows={15}></textarea>
+                            <textarea name="" cols={100} rows={8}></textarea>
                         </div>
                     </div>
 

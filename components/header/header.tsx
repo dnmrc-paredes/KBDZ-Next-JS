@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import { User } from "@firebase/auth";
 import Link from 'next/link'
-import { IoCartOutline, IoPerson } from 'react-icons/io5'
+import { IoCartOutline, IoPerson, IoLogInOutline } from 'react-icons/io5'
 import { Badge } from '@material-ui/core';
 import { useSelector, useDispatch } from "react-redux";
 // import Skeleton from 'react-loading-skeleton';
@@ -117,15 +117,11 @@ export const Header = () => {
                         <p onClick={logout}> Logout </p>
                     </div> }
 
-                </div> : <p>
-                    <Link href="/login"> Login </Link> / <Link href="/register"> Register </Link>
-                </p> }
+                </div> : <div className={s.register}>
+                    <Link href="/login"> Login </Link>
+                    <IoLogInOutline onClick={() => router.push('/login')} className={s.registerIcon} color="#3373C4" size={25} />
+                </div> }
                 
-                {/* <div> <Skeleton height={40} width={40} circle={true} /> </div> */}
-                
-                {/* { user ? <p onClick={logout}> Logout </p> : <p>
-                    <Link href="/login"> Login </Link> / <Link href="/register"> Register </Link>
-                </p> } */}
             </div>
         </nav>
     )

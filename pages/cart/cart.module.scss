@@ -200,3 +200,31 @@ main.main {
     }
 
 }
+
+@media screen and (max-width: 850px) {
+
+    main.main {
+
+        .cart {
+
+            .myCart {
+
+                flex-direction: column;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    main.main {
+
+        .cart {
+            margin: 3rem 0rem;
+            // background-color: red;
+
+        }
+    }
+
+}

@@ -10,7 +10,7 @@ main.card {
     transition-property: all;
     transition-duration: 0.5s;
     border: solid transparent 4px;
-    // width: 300px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;

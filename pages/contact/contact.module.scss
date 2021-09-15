@@ -23,7 +23,7 @@ main.main {
         .form {
             flex: 1;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
 
             .inputs {
                 flex: 1;
@@ -40,16 +40,19 @@ main.main {
                 input {
                     margin-bottom: 1rem;
                     padding: 0.5rem;
-                    width: 90%;
+                    // width: 90%;
                     font-family: $main-font;
                     font-weight: 600;
                     border-radius: 5px;
-                    border: solid black 4px;
+                    outline: none;
+                    border: solid black 1px;
                 }
             }
     
             .txtarea {
                 flex: 1;
+                display: flex;
+                flex-direction: column;
     
                 label {
                     font-family: $main-font;
@@ -63,7 +66,7 @@ main.main {
                     font-family: $main-font;
                     font-weight: 600;
                     border-radius: 5px;
-                    border: solid black 4px;
+                    // border: solid black 4px;
                 }
             }
         }
@@ -90,4 +93,12 @@ main.main {
             }
         } 
     }
+}
+
+@media screen and (max-width: 450px) {
+
+    main.main {
+        margin: 3rem 1.5rem;
+    }
+
 }

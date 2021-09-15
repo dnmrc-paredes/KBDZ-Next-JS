@@ -3,7 +3,6 @@ import { NextPage } from "next";
 import Image from 'next/image'
 import Carousel from "react-multi-carousel";
 import Head from 'next//head'
-import { FaThumbsUp, FaMoneyBillWave, FaPercentage } from 'react-icons/fa'
 
 // Images
 import bluetooth from '../../public/btooth.jpg'
@@ -95,21 +94,6 @@ const Shop: NextPage = () => {
                 </div>
             </div>
 
-            {/* <div className={s.shopInfo}>
-                <div className={s.items}>
-                    <FaThumbsUp color="#3373C4" size={80}/>
-                    <p> Fast Service </p>
-                </div>
-                <div className={s.items}>
-                    <FaMoneyBillWave color="#6B8068" size={80}/>
-                    <p> Affordable Price </p>
-                </div>
-                <div className={s.items}>
-                    <FaPercentage color="red" size={80}/>
-                    <p> Genuine Products </p>
-                </div>
-            </div> */}
-
             <div className={s.threeTiles}>
                 <div className={s.tileBox}>
                     <div className={s.tile1}>
@@ -128,7 +112,7 @@ const Shop: NextPage = () => {
             <div className={s.newsletter}>
                 <form onSubmit={e => e.preventDefault()}>
                     <h1> Subscribe to our newsletter </h1>
-                    <div>
+                    <div className={s.inputForm}>
                         <label htmlFor=""> Enter Email Address </label>
                         <input placeholder="sample@gmail.com" type="email" name="email" />
                         <button> Subscribe </button>

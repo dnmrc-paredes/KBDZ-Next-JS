@@ -44,3 +44,11 @@ main.main {
     }
 
 }
+
+@media screen and (max-width: 500px) {
+
+    main.main {
+        margin: 3rem 0 0 0;
+    }
+
+}
