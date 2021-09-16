@@ -103,3 +103,20 @@ main.main {
     }
 
 }
+
+@media screen and (max-width: 500px) {
+
+    .itemRoot {
+        margin: 3rem 0 0 0;
+
+        .itemDetails {
+            // background-color: blue;
+    
+            .itemInfo {
+                margin: 2rem 0;
+            }
+
+        }
+    }
+
+}

@@ -23,6 +23,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const myPurchases = [] as Ipurchases[]
     const { KBDZRefreshToken } = cookies(ctx) as { checkoutID: string, KBDZToken: string, KBDZRefreshToken: string }
 
+    if (!KBDZRefreshToken) {
+        return {
+            redirect: {
+                destination: '/shop',
+                permanent: true
+            }
+        }
+    }
+
     const idToken = await refreshToken(KBDZRefreshToken)
     const { uid } = await firebaseAdmin.verifyIdToken(idToken)
 

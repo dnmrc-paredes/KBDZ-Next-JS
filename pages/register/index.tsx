@@ -10,19 +10,29 @@ import cookies from 'next-cookies'
 import { firebaseAuth } from "../../firebase/client";
 import { firebaseAdmin } from "../../firebase/server";
 
+// Utils
+import { refreshToken } from "../../utils/refreshToken";
+
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
 import s from './register.module.scss'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => { 
 
-    const { KBDZToken } = cookies(ctx) as { KBDZToken: string }
+    const { KBDZToken, KBDZRefreshToken } = cookies(ctx) as { KBDZToken: string, KBDZRefreshToken: string }
+
+    if (!KBDZRefreshToken) {
+        return {
+            props: {}
+        }
+    }
 
     try {
 
-        const result = await firebaseAdmin.verifyIdToken(KBDZToken, true)
+        const idToken = await refreshToken(KBDZRefreshToken)
+        const { uid } = await firebaseAdmin.verifyIdToken(idToken)
 
-        if (result.uid) {
+        if (uid) {
             return {
                 redirect: {
                     destination: '/shop',
@@ -33,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         }
         
     } catch (err) {
-        console.log(err.code)
+        console.log(err)
     }
 
     return {

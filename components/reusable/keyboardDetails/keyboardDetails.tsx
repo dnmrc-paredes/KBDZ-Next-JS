@@ -47,11 +47,11 @@ export const KeyboardDetailsComp: FC<{data: Ikeyboard}> = (props) => {
                 display: 'flex',
                 backgroundColor: 'white',
                 height: '200px',
-                width: '500px',
                 margin: 'auto',
                 justifyContent: 'center',
                 alignItems: 'center',
-                boxShadow: `0px 0px 2px 0px rgba(0,0,0,0.75)`
+                boxShadow: `0px 0px 2px 0px rgba(0,0,0,0.75)`,
+                maxWidth: '500px',
             }}} isOpen={notLoggedInModal} >
                 <div className={s.modalInfo}>
                     <h3> You must be logged in to proceed </h3>

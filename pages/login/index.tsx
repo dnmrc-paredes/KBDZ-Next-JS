@@ -13,6 +13,9 @@ import { useDispatch } from "react-redux";
 import { firebaseAuth } from "../../firebase/client";
 import { firebaseAdmin } from "../../firebase/server";
 
+// Utils
+import { refreshToken } from "../../utils/refreshToken";
+
 // Redux
 import { loadCart } from "../../redux/actions/cart";
 
@@ -22,13 +25,20 @@ import s from './login.module.scss'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => { 
 
-    const { KBDZToken } = cookies(ctx) as { KBDZToken: string }
+    const { KBDZRefreshToken } = cookies(ctx) as { KBDZToken: string, KBDZRefreshToken: string }
+
+    if (!KBDZRefreshToken) {
+        return {
+            props: {}
+        }
+    }
 
     try {
 
-        const result = await firebaseAdmin.verifyIdToken(KBDZToken, true)
+        const idToken = await refreshToken(KBDZRefreshToken)
+        const { uid } = await firebaseAdmin.verifyIdToken(idToken)
 
-        if (result.uid) {
+        if (uid) {
             return {
                 redirect: {
                     destination: '/shop',
@@ -143,13 +153,18 @@ const Login: NextPage = () => {
                 router.push('/shop')
                 // ...
             }).catch(error => {
-                // Handle Errors here.
-                // const errorCode = error.code;
-                // const errorMessage = error.message;
+
+                const errorCode = error.code
+                const errorMessage = error.message
                 // The email of the user's account used.
-                // const email = error.email;
+                // const email = error.email
                 // The AuthCredential type that was used.
-                // const credential = GoogleAuthProvider.credentialFromError(error);
+                // const credential = GoogleAuthProvider.credentialFromError(error)
+                if (errorCode === 'auth/account-exists-with-different-credential') {
+                    return toast('Email already registered', { type: 'error' })
+                }
+                // console.log(errorMessage)
+
                 // ...
         })
 

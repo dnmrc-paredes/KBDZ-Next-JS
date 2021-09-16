@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const { checkoutID, KBDZRefreshToken } = cookies(ctx) as { checkoutID: string, KBDZToken: string, KBDZRefreshToken: string }
 
-    if (!checkoutID) {
+    if (!checkoutID || !KBDZRefreshToken) {
         return {
             notFound: true
         }

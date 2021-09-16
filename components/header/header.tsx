@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import { User } from "@firebase/auth";
 import Link from 'next/link'
+import Modal from 'react-modal';
 import { IoCartOutline, IoPerson, IoLogInOutline } from 'react-icons/io5'
 import { Badge } from '@material-ui/core';
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +20,8 @@ import { clearCart } from "../../redux/actions/cart";
 
 // Styles
 import s from './header.module.scss'
+import otherStyles from '../reusable/keyboardDetails/keyboardDetails.module.scss'
+import 'reactjs-popup/dist/index.css';
 
 // Firebase
 import { firebaseAuth } from "../../firebase/client";
@@ -32,10 +35,21 @@ export const Header = () => {
         return accu+=item.qty
     }, 0)
 
+    const [notLoggedInModal, setNotLoggedInModal] = useState(false)
     const [showMenu1, setShowMenu1] = useState(false)
     const [showCart, setShowCart] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const { user } = useAuth() as { user: User, isLoggedIn: boolean}
+
+    const goToCart = () => {
+
+        if (!user) {
+            setNotLoggedInModal(true)
+        }
+
+        setShowCart(false)
+        router.push('/cart')
+    }
 
     const logout = async () => {
 
@@ -98,10 +112,7 @@ export const Header = () => {
                                 }) }
 
                             </div>
-                            <button onClick={() => {
-                                setShowCart(false)
-                                router.push('/cart')
-                            }}> Go To Cart </button>
+                            <button onClick={goToCart}> Go To Cart </button>
                         </div> : null }
                     </div>
                 </Badge>
@@ -123,6 +134,24 @@ export const Header = () => {
                 </div> }
                 
             </div>
+
+            <Modal ariaHideApp={false} onRequestClose={() => setNotLoggedInModal(false)} style={{content: {
+                display: 'flex',
+                backgroundColor: 'white',
+                height: '200px',
+                maxWidth: '500px',
+                margin: 'auto',
+                justifyContent: 'center',
+                alignItems: 'center',
+                boxShadow: `0px 0px 2px 0px rgba(0,0,0,0.75)`,
+                zIndex: 10,
+            }}} isOpen={notLoggedInModal} >
+                <div className={otherStyles.modalInfo}>
+                    <h3> You must be logged in to proceed </h3>
+                    <button onClick={() => router.push('/login')}> Login </button>
+                </div>
+            </Modal>
+
         </nav>
     )
 
