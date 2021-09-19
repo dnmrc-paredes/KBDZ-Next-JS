@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 // Components
 import { Header } from '../components/header/header'
 import { Footer } from '../components/footer/footer'
+// import { SideBar } from '../components/sidebar/sidebar'
 
 // Store
 import { store, persistor } from '../redux'
@@ -31,6 +32,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <AuthProvider>
             <DataProvider>
               <Header/>
+              {/* <SideBar/> */}
               <Component {...pageProps} />
               <Footer/>
             </DataProvider>

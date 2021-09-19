@@ -3,7 +3,7 @@ import { useRouter } from "next/dist/client/router";
 import { User } from "@firebase/auth";
 import Link from 'next/link'
 import Modal from 'react-modal';
-import { IoCartOutline, IoPerson, IoLogInOutline } from 'react-icons/io5'
+import { IoCartOutline, IoPerson, IoLogInOutline, IoMenuOutline } from 'react-icons/io5'
 import { Badge } from '@material-ui/core';
 import { useSelector, useDispatch } from "react-redux";
 // import Skeleton from 'react-loading-skeleton';
@@ -12,19 +12,23 @@ import Image from 'next/image'
 // Context
 import { useAuth } from "../../contexts/authContext";
 
+
+// Firebase
+import { firebaseAuth } from "../../firebase/client";
+
 // Types
 import { IrootState } from "../../types/types";
 
 // Redux
 import { clearCart } from "../../redux/actions/cart";
 
+// Components
+import { SideBar } from "../sidebar/sidebar";
+
 // Styles
 import s from './header.module.scss'
 import otherStyles from '../reusable/keyboardDetails/keyboardDetails.module.scss'
 import 'reactjs-popup/dist/index.css';
-
-// Firebase
-import { firebaseAuth } from "../../firebase/client";
 
 export const Header = () => {
 
@@ -39,6 +43,7 @@ export const Header = () => {
     const [showMenu1, setShowMenu1] = useState(false)
     const [showCart, setShowCart] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
+    const [showSidebar, setShowSidebar] = useState(false)
     const { user } = useAuth() as { user: User, isLoggedIn: boolean}
 
     const goToCart = () => {
@@ -62,77 +67,87 @@ export const Header = () => {
 
     return (
         <nav className={s.navbar}>
-            <div className={s.navlogo}>
-                <h1 onClick={() => router.push('/')}> Kbdz </h1>
-            </div>
-            
-            <div className={s.navlinks}>
 
-                <div className={s.allproductsmain}>
-                    <p 
-                        onMouseOver={() => setShowMenu1(true)}
-                    > All Products </p>
+            <div className={s.firstLayer}>
+
+                <div className={s.navlogo}>
+                    <h1 onClick={() => router.push('/')}> Kbdz </h1>
+                </div>
+                
+                <div className={s.navlinks}>
+
+                    <div className={s.allproductsmain}>
+                        <p 
+                            onMouseOver={() => setShowMenu1(true)}
+                        > All Products </p>
+                        
+                        { showMenu1 && <div
+                            onMouseOver={() => setShowMenu1(true)}
+                            onMouseLeave={() => setShowMenu1(false)}
+                            className={s.allproductsdropdown}
+                        >
+                            <Link href="/royal-kludge-products"> Royal Kludge </Link>
+                            <Link href="/redragon-products"> Redragon </Link>
+                            <Link href="/ducky-products"> Ducky </Link>
+
+                        </div> }
+                    </div>
+
+                    <Link href="/contact"> Contact </Link>
+                    {/* <Link href="/aboutus"> About Us </Link> */}
                     
-                    { showMenu1 && <div
-                        onMouseOver={() => setShowMenu1(true)}
-                        onMouseLeave={() => setShowMenu1(false)}
-                        className={s.allproductsdropdown}
-                    >
-                        <Link href="/royal-kludge-products"> Royal Kludge </Link>
-                        <Link href="/redragon-products"> Redragon </Link>
-                        <Link href="/ducky-products"> Ducky </Link>
-
-                    </div> }
                 </div>
 
-                <Link href="/contact"> Contact </Link>
-                <Link href="/aboutus"> About Us </Link>
+                <div className={s.loginregister}>
+                    <Badge style={{margin: '0 2rem', cursor: 'pointer'}} badgeContent={ user ? itemsTotal : 0   } color="primary" >
+                        <div className={s.cart}>
+                            <IoCartOutline onClick={() => setShowCart(prev => !prev)} size={25} color="#3373C4" />
+                            { showCart ? <div className={s.cartShow}>
+                                <div className={s.cartItems}>
+
+                                    { items.length === 0 && <div className={s.emptyCart}>
+                                        <p> Your cart is empty </p>
+                                        <p style={{fontSize: '0.8rem', marginTop: '0.5rem', color: 'gray'}}> Start adding items </p>
+                                    </div> }
+
+                                    { items.map(item => {
+                                        return (
+                                            <div className={s.items} key={item.id}>
+                                                <p> {item.id} </p>
+                                                <p> X {item.qty} </p>
+                                            </div>
+                                        )
+                                    }) }
+
+                                </div>
+                                <button onClick={goToCart}> Go To Cart </button>
+                            </div> : null }
+                        </div>
+                    </Badge>
+
+                    { user ? <div className={s.userImgRoot}>
+
+                        { user.photoURL ? 
+                            <Image onClick={() => setShowMenu(prev => !prev)} className={s.userImg} height={35} width={35} src={user.photoURL!} alt="sdafasdf" /> : 
+                        <IoPerson style={{cursor: 'pointer'}} onClick={() => setShowMenu(prev => !prev)} color="#3373C4" size={25} /> }
+                        
+                        { showMenu && <div className={s.userImgList}>
+                            <p onClick={() => router.push('/purchasehistory')}> Purchase History </p>
+                            <p onClick={logout}> Logout </p>
+                        </div> }
+
+                    </div> : <div className={s.register}>
+                        <Link href="/login"> Login </Link>
+                        <IoLogInOutline onClick={() => router.push('/login')} className={s.registerIcon} color="#3373C4" size={25} />
+                    </div> }
                 
+                </div>
+
             </div>
 
-            <div className={s.loginregister}>
-                <Badge style={{margin: '0 2rem', cursor: 'pointer'}} badgeContent={ user ? itemsTotal : 0   } color="primary" >
-                    <div className={s.cart}>
-                        <IoCartOutline onClick={() => setShowCart(prev => !prev)} size={25} color="#3373C4" />
-                        { showCart ? <div className={s.cartShow}>
-                            <div className={s.cartItems}>
-
-                                { items.length === 0 && <div className={s.emptyCart}>
-                                    <p> Your cart is empty </p>
-                                    <p style={{fontSize: '0.8rem', marginTop: '0.5rem', color: 'gray'}}> Start adding items </p>
-                                </div> }
-
-                                { items.map(item => {
-                                    return (
-                                        <div className={s.items} key={item.id}>
-                                            <p> {item.id} </p>
-                                            <p> X {item.qty} </p>
-                                        </div>
-                                    )
-                                }) }
-
-                            </div>
-                            <button onClick={goToCart}> Go To Cart </button>
-                        </div> : null }
-                    </div>
-                </Badge>
-
-                { user ? <div className={s.userImgRoot}>
-
-                    { user.photoURL ? 
-                        <Image onClick={() => setShowMenu(prev => !prev)} className={s.userImg} height={35} width={35} src={user.photoURL!} alt="sdafasdf" /> : 
-                    <IoPerson style={{cursor: 'pointer'}} onClick={() => setShowMenu(prev => !prev)} color="#3373C4" size={25} /> }
-                    
-                    { showMenu && <div className={s.userImgList}>
-                        <p onClick={() => router.push('/purchasehistory')}> Purchase History </p>
-                        <p onClick={logout}> Logout </p>
-                    </div> }
-
-                </div> : <div className={s.register}>
-                    <Link href="/login"> Login </Link>
-                    <IoLogInOutline onClick={() => router.push('/login')} className={s.registerIcon} color="#3373C4" size={25} />
-                </div> }
-                
+            <div className={s.secondLayer}>
+                <IoMenuOutline style={{cursor: 'pointer'}} onClick={() => setShowSidebar(prev => !prev)} color="black" size={40} />
+                { showSidebar && <SideBar toggle={setShowSidebar} /> }
             </div>
 
             <Modal ariaHideApp={false} onRequestClose={() => setNotLoggedInModal(false)} style={{content: {

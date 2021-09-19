@@ -10,7 +10,7 @@ import s from './itemCard.module.scss'
 
 export const KeyboardItem: FC<Ikeyboard> = (props) => {
 
-    const { id, brand, name, uid } = props
+    const { brand, name, uid } = props
 
     const router = useRouter()
 

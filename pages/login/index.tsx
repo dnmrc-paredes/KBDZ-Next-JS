@@ -124,7 +124,10 @@ const Login: NextPage = () => {
                 // ...
             }).catch(error => {
                 // Handle Errors here.
-                // const errorCode = error.code;
+                const errorCode = error.code
+                if (errorCode === 'auth/account-exists-with-different-credential') {
+                    return toast('Email already registered', { type: 'error' })
+                }
                 // const errorMessage = error.message;
                 // The email of the user's account used.
                 // const email = error.email;
@@ -135,40 +138,40 @@ const Login: NextPage = () => {
 
     }
 
-    const facebookSignIn = () => {
+    // const facebookSignIn = () => {
 
-        const provider = new FacebookAuthProvider()
-        signInWithPopup(firebaseAuth, provider)
-            .then(async result => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                // const credential = FacebookAuthProvider.credentialFromResult(result);
-                const token = await result.user.getIdToken()
-                const refreshToken = result.user.refreshToken
-                // The signed-in user info.
-                const user = result.user;
-                // console.log(credential)
-                document.cookie = `KBDZToken=${token}; path=/;`
-                document.cookie = `KBDZRefreshToken=${refreshToken}; path=/;`
-                dispatch(loadCart(user.uid))
-                router.push('/shop')
-                // ...
-            }).catch(error => {
+    //     const provider = new FacebookAuthProvider()
+    //     signInWithPopup(firebaseAuth, provider)
+    //         .then(async result => {
+    //             // This gives you a Google Access Token. You can use it to access the Google API.
+    //             // const credential = FacebookAuthProvider.credentialFromResult(result);
+    //             const token = await result.user.getIdToken()
+    //             const refreshToken = result.user.refreshToken
+    //             // The signed-in user info.
+    //             // const user = result.user;
+    //             // console.log(credential)
+    //             document.cookie = `KBDZToken=${token}; path=/;`
+    //             document.cookie = `KBDZRefreshToken=${refreshToken}; path=/;`
+    //             dispatch(loadCart(result.user.uid))
+    //             router.push('/shop')
+    //             // ...
+    //         }).catch(error => {
 
-                const errorCode = error.code
-                const errorMessage = error.message
-                // The email of the user's account used.
-                // const email = error.email
-                // The AuthCredential type that was used.
-                // const credential = GoogleAuthProvider.credentialFromError(error)
-                if (errorCode === 'auth/account-exists-with-different-credential') {
-                    return toast('Email already registered', { type: 'error' })
-                }
-                // console.log(errorMessage)
+    //             const errorCode = error.code
+    //             const errorMessage = error.message
+    //             // The email of the user's account used.
+    //             // const email = error.email
+    //             // The AuthCredential type that was used.
+    //             // const credential = GoogleAuthProvider.credentialFromError(error)
+    //             if (errorCode === 'auth/account-exists-with-different-credential') {
+    //                 return toast('Email already registered', { type: 'error' })
+    //             }
+    //             // console.log(errorMessage)
 
-                // ...
-        })
+    //             // ...
+    //     })
 
-    }
+    // }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -195,7 +198,7 @@ const Login: NextPage = () => {
                     <button onClick={emailPasswordHandler} className={s.signin}> Sign In </button>
                     <p> or </p>
                     <button onClick={googleSignIn} className={s.google}> <FcGoogle style={{marginRight: '5px'}} size={25} /> Sign In with Google </button>
-                    <button onClick={facebookSignIn} className={s.facebook}> Sign In with Facebook </button>
+                    {/* <button onClick={facebookSignIn} className={s.facebook}> Sign In with Facebook </button> */}
                     <Link href="register" passHref={true}> Don&apos;t have an account? Sign up here. </Link>
                 </form>
             </main>

@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5'
 import { createInvoice, download } from 'easyinvoice';
+import Image from 'next/image'
 // import paymaya from 'paymaya-js-sdk';
 import axios from "axios";
 
@@ -86,11 +87,34 @@ const Cart = () => {
                                 return (
                                     <div className={s.item} key={item.id}>
                                         <div className={s.itemInfo}>
-                                            <h1> {item.id} </h1>
-                                            <p> X <span> {item.qty} </span> </p>
+                                            
+                                            <div className={s.firstLayer}>
+                                                <div className={s.itemImg}>
+                                                    <Image height={1000} width={1000} src={'/mech-png.png'} alt="sf" />
+                                                </div>
+                                            </div>
+
+                                            <div className={s.secondLayer}>
+
+                                                <div className={s.itemDesc}>
+                                                    <h2> {item.id} </h2>
+                                                    <p> Quantity: {item.qty} </p>
+                                                </div>
+
+                                                <div className={s.itemBtns}>
+                                                    <p> &#8369;{item.total} </p>
+                                                    <button onClick={() => dispatch(removeToCart(item.id, item.price))}>
+                                                        <IoRemoveOutline color="#3373C4" size={20} />
+                                                    </button>
+                                                    <button onClick={() => dispatch(addToCart(item.id, item.price))}>
+                                                        <IoAddOutline color="#3373C4" size={20} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
 
-                                        <div className={s.itemBtns}>
+                                        {/* <div className={s.itemBtns}>
                                             <p> &#8369;{item.total} </p>
                                             <button onClick={() => dispatch(removeToCart(item.id, item.price))}>
                                                 <IoRemoveOutline color="#3373C4" size={20} />
@@ -98,7 +122,7 @@ const Cart = () => {
                                             <button onClick={() => dispatch(addToCart(item.id, item.price))}>
                                                 <IoAddOutline color="#3373C4" size={20} />
                                             </button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 )
                             }) }
