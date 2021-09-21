@@ -29,7 +29,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import s from './cart.module.scss'
 
 const options = {
-    "client-id": `${process.env.PAYPAL_CLIENT_ID}`
+    "client-id": `${process.env.PAYPAL_CLIENT_ID}`,
+    "currency": 'PHP'
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => { 
@@ -114,15 +115,6 @@ const Cart = () => {
                                             
                                         </div>
 
-                                        {/* <div className={s.itemBtns}>
-                                            <p> &#8369;{item.total} </p>
-                                            <button onClick={() => dispatch(removeToCart(item.id, item.price))}>
-                                                <IoRemoveOutline color="#3373C4" size={20} />
-                                            </button>
-                                            <button onClick={() => dispatch(addToCart(item.id, item.price))}>
-                                                <IoAddOutline color="#3373C4" size={20} />
-                                            </button>
-                                        </div> */}
                                     </div>
                                 )
                             }) }
@@ -153,8 +145,8 @@ const Cart = () => {
                                                       amount: {
                                                         value: `${items.reduce((accu, curr) => {
                                                             return accu+=curr.total
-                                                        }, 0)}`,
-                                                      },
+                                                        }, 0)}`
+                                                      }
                                                     },
                                                 ]
                                             })
@@ -163,12 +155,16 @@ const Cart = () => {
                                             return actions.order.capture().
                                             then(async res => {
                                                 toast('Payment Success.', { type: 'success' })
+                                                console.log(res)
                                                 const invoiceResult = await createInvoice(invoiceData(items, res.payer))
                                                 download('myreceipt', invoiceResult.pdf)
                                                 dispatch(sucessBuyClear())
                                             })
                                         }}
-                                        onError={(err) => toast('Please try again later.', { type: 'error' })}
+                                        onError={(err) => {
+                                            console.log(err)
+                                            toast('Please try again later.', { type: 'error' })
+                                        }}
                                     />
                                 </PayPalScriptProvider>
                             </div>

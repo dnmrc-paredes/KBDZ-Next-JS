@@ -46,7 +46,7 @@ const Shop: NextPage = () => {
                 <title> KBDZ | Shop </title>
             </Head>
 
-            <Carousel containerClass={s.carousel} infinite={true} autoPlay={true} responsive={responsive}>
+            <Carousel swipeable={true} removeArrowOnDeviceType={['mobile']} containerClass={s.carousel} infinite={true} autoPlay={true} responsive={responsive}>
                 <div>
                     <Image placeholder="blur" src={membrane} height={400} width={600} alt="asdfasdf" />
                 </div>
@@ -113,7 +113,7 @@ const Shop: NextPage = () => {
                 <form onSubmit={e => e.preventDefault()}>
                     <h1> Subscribe to our newsletter </h1>
                     <div className={s.inputForm}>
-                        <label htmlFor=""> Enter Email Address </label>
+                        <label htmlFor="email"> Enter Email Address </label>
                         <input placeholder="sample@gmail.com" type="email" name="email" />
                         <button> Subscribe </button>
                     </div>
