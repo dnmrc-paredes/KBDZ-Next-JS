@@ -9,6 +9,7 @@ import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5'
 import { createInvoice, download } from 'easyinvoice';
 import Image from 'next/image'
 import axios from "axios";
+import { useRouter } from "next/router";
 
 // Utils
 import { invoiceData } from "../../utils/easyinvoice";
@@ -51,6 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const Cart = () => {
 
+    const router = useRouter()
     const dispatch = useDispatch()
     const items = useSelector((state: IrootState) => state.cart)
     const total = useSelector((state: IrootState) => state.cart).reduce((accu, curr) => {
@@ -180,6 +182,8 @@ const Cart = () => {
                                     
                                 }}> Pay with Paymaya </button>
                             </div>
+
+                            <p onClick={() => router.push('/test-cards')} className={s.testCards}> For test cards click here. </p>
 
                         </div>
 

@@ -169,6 +169,15 @@ main.main {
                 margin: 0 1rem;
                 padding: 1rem 0;
 
+                p.testCards {
+                    font-family: $main-font;
+                    text-align: center;
+                    margin-top: 0.5rem;
+                    font-size: 0.9rem;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+
                 .title {
                     padding: 1rem 0;
 
