@@ -39,8 +39,11 @@ if (!admin.apps.length) {
     admin.initializeApp({
         credential: admin.credential.cert({
             clientEmail: process.env.CLIENT_EMAIL,
-            privateKey: process.env.PRIVATE_KEY,
-            projectId: process.env.PROJECT_ID!.replace(/\\n/g, '\n')
+            privateKey: process.env.PRIVATE_KEY!.replace(/\\n/g, '\n'),
+            // privateKey: process.env.PRIVATE_KEY,
+            // projectId: JSON.parse(Buffer.from(process.env.PROJECT_ID!, 'base64').toString())
+            projectId: process.env.PROJECT_ID
+            // projectId: process.env.PROJECT_ID!.replace(/\\n/g, '\n')
         }),
         databaseURL: process.env.DB_URL
     })

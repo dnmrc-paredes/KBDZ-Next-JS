@@ -146,8 +146,8 @@ const Cart = () => {
                                                 ]
                                             })
                                         }}
-                                        onApprove={(_data, actions) => {
-                                            return actions.order.capture().
+                                        onApprove={async (_data, actions) => {
+                                            return await actions.order.capture().
                                             then(async res => {
                                                 toast('Payment Success.', { type: 'success' })
                                                 const invoiceResult = await createInvoice(invoiceData(items, res.payer))
