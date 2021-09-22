@@ -1,7 +1,7 @@
 import React from "react";
 import Head from 'next/head'
 import { NextPage } from 'next'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Skeleton from 'react-loading-skeleton';
 
 // Contexts
 import { useKeyboardData } from "../../contexts/keyboardDatasContext";

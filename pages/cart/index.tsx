@@ -3,20 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { GetServerSideProps } from "next";
 import cookies from 'next-cookies'
 import Head from 'next/head'
-// import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5'
 import { createInvoice, download } from 'easyinvoice';
 import Image from 'next/image'
-// import paymaya from 'paymaya-js-sdk';
 import axios from "axios";
-
-// Firebase
-// import { firebaseDB } from "../../firebase/client";
 
 // Utils
 import { invoiceData } from "../../utils/easyinvoice";
+import { paymayaBody } from "../../utils/paymaya/paymaya";
 
 // Types
 import { IrootState, Tpaymaya } from "../../types/types";
@@ -55,7 +51,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const Cart = () => {
 
-    // const router = useRouter()
     const dispatch = useDispatch()
     const items = useSelector((state: IrootState) => state.cart)
     const total = useSelector((state: IrootState) => state.cart).reduce((accu, curr) => {
@@ -155,14 +150,12 @@ const Cart = () => {
                                             return actions.order.capture().
                                             then(async res => {
                                                 toast('Payment Success.', { type: 'success' })
-                                                console.log(res)
                                                 const invoiceResult = await createInvoice(invoiceData(items, res.payer))
                                                 download('myreceipt', invoiceResult.pdf)
                                                 dispatch(sucessBuyClear())
                                             })
                                         }}
                                         onError={(err) => {
-                                            console.log(err)
                                             toast('Please try again later.', { type: 'error' })
                                         }}
                                     />
@@ -172,35 +165,7 @@ const Cart = () => {
                             <div className={s.paymaya}>
                                 <button disabled={items.length <= 0} onClick={async () => {
 
-                                    const checkoutObj = {
-                                        totalAmount: {
-                                            value: total + 30,
-                                            currency: 'PHP',
-                                            details: {
-                                                discount: 0,
-                                                serviceCharge: 10,
-                                                shippingFee: 20,
-                                                tax: 0,
-                                                subtotal: 0
-                                            },
-                                        },
-                                        items: items.map(cartItem => {
-                                            return {
-                                                name: cartItem.id.toString(),
-                                                quantity: cartItem.qty,
-                                                totalAmount: {
-                                                    value: cartItem.total
-                                                }
-                                            }
-                                        }),
-                                        redirectUrl: {
-                                            cancel: 'http://localhost:3000/checkout/payment/status/',
-                                            failure: 'http://localhost:3000/checkout/payment/status/',
-                                            success: 'http://localhost:3000/checkout/payment/status/'
-                                        },
-                                        requestReferenceNumber: '000141386713',
-                                        metadata: {}
-                                    }
+                                    const checkoutObj = paymayaBody(total, items)
 
                                     const { data } = await axios.post<Tpaymaya>('https://pg-sandbox.paymaya.com/checkout/v1/checkouts', checkoutObj, {
                                         headers: {

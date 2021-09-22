@@ -19,7 +19,7 @@ import s from './register.module.scss'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => { 
 
-    const { KBDZToken, KBDZRefreshToken } = cookies(ctx) as { KBDZToken: string, KBDZRefreshToken: string }
+    const { KBDZRefreshToken } = cookies(ctx) as { KBDZToken: string, KBDZRefreshToken: string }
 
     if (!KBDZRefreshToken) {
         return {

@@ -65,6 +65,10 @@ const PurchaseHistory: NextPage<{myPurchases: Ipurchases[]}> = ({myPurchases}) =
                     <h1> My Purchased History </h1>
                 </div>
 
+                { myPurchases.length < 0 ? <div>
+                    <h2> No Records </h2>
+                </div> : null }
+
                 <div className={s.items}>
                     { myPurchases.map(item => {
                         return (

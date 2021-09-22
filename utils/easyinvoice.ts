@@ -4,8 +4,8 @@ export const invoiceData = (products: Iitem[], payer: IpayerPaypal) => {
 
     return {
         "documentTitle": "KBDZ | RECEIPT", //Defaults to INVOICE
-        //"locale": "de-DE", //Defaults to en-US, used for number formatting (see docs)
-        "currency": "USD", //See documentation 'Locales and Currency' for more info
+        // "locale": "de-DE", //Defaults to en-US, used for number formatting (see docs)
+        "currency": "PHP", //See documentation 'Locales and Currency' for more info
         "taxNotation": "vat", //or gst
         "marginTop": 25,
         "marginRight": 25,

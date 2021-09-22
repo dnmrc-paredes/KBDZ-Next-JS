@@ -1,6 +1,6 @@
 import React from "react";
 import { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 // Firebase
 import { firebaseDB } from "../../../firebase/client";
@@ -13,12 +13,15 @@ import s from '../purchasehistory.module.scss'
 
 const commaNumber = require('comma-number')
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+
+    const querySnapshots = await getDocs(collection(firebaseDB, 'purchases'))
+    const paths = querySnapshots.docs.map(doc => {
+        return { params: { purchaseid: doc.id } }
+    })
 
     return {
-        paths: [
-            { params: { purchaseid: '1' } }
-        ],
+        paths,
         fallback: "blocking"
     }
 

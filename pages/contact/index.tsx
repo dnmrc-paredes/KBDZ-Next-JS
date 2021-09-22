@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import Head from 'next/head'
+import { NextPage } from "next";
 import { ToastContainer, toast } from 'react-toastify';
 import { collection, addDoc } from 'firebase/firestore'
 
@@ -10,7 +11,7 @@ import { firebaseDB } from "../../firebase/client";
 import s from './contact.module.scss'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Contact = () => {
+const Contact: NextPage = () => {
 
     const [emailForm, setEmailForm] = useState({
         name: "",

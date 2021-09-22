@@ -20,9 +20,7 @@ export const refreshToken = async (IDtoken: string) => {
             }
         }
     )
-
-    console.log(data.user_id)
-        
+       
     return data.id_token
 
 }

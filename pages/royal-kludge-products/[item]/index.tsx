@@ -1,15 +1,15 @@
 import React from "react";
 import Head from 'next/head'
-import { GetStaticPaths, GetStaticProps, NextPage, GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from 'next/image'
 import Carousel from 'react-multi-carousel'
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 // Firebase
 import { firebaseDB } from "../../../firebase/client";
 
 // Data
-import { keyboardsData } from "../../../data/fakeData";
+// import { keyboardsData } from "../../../data/fakeData";
 
 // Types
 import { Ikeyboard } from "../../../types/types";
@@ -21,13 +21,16 @@ import { KeyboardDetailsComp } from "../../../components/reusable/keyboardDetail
 import s from '../royal-kludge.module.scss'
 import 'react-multi-carousel/lib/styles.css';
 
-export const getStaticPaths: GetStaticPaths = (ctx) => {
+export const getStaticPaths: GetStaticPaths = async (ctx) => {
+
+    const querySnapshot = await getDocs(collection(firebaseDB, "keyboards"));
+    const paths = querySnapshot.docs.map(doc => {
+        return { params: { item: doc.id } }
+    })
 
     return {
-        paths: [
-            { params: { item: '1' } }
-        ],
-        fallback: 'blocking',
+        paths,
+        fallback: 'blocking'
     }
 
 }

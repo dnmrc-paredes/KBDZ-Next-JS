@@ -35,7 +35,7 @@ const responsive = {
       items: 1,
       slidesToSlide: 1 // optional, default to 1.
     }
-  }
+}
 
 const Shop: NextPage = () => {
 

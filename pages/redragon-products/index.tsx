@@ -1,6 +1,6 @@
 import React from "react";
 import Head from 'next/head'
-import { GetStaticProps, NextPage } from 'next'
+import { NextPage } from 'next'
 
 // Contexts
 import { useKeyboardData } from "../../contexts/keyboardDatasContext";

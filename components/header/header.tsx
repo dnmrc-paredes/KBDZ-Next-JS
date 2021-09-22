@@ -12,7 +12,6 @@ import Image from 'next/image'
 // Context
 import { useAuth } from "../../contexts/authContext";
 
-
 // Firebase
 import { firebaseAuth } from "../../firebase/client";
 

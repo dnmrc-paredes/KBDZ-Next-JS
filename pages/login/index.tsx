@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from "next";
 import Head from 'next/head'
 import { useRouter } from "next/dist/client/router";
 import { FcGoogle } from 'react-icons/fc'
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "@firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
 import cookies from 'next-cookies'
@@ -128,50 +128,10 @@ const Login: NextPage = () => {
                 if (errorCode === 'auth/account-exists-with-different-credential') {
                     return toast('Email already registered', { type: 'error' })
                 }
-                // const errorMessage = error.message;
-                // The email of the user's account used.
-                // const email = error.email;
-                // The AuthCredential type that was used.
-                // const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
+
         })
 
     }
-
-    // const facebookSignIn = () => {
-
-    //     const provider = new FacebookAuthProvider()
-    //     signInWithPopup(firebaseAuth, provider)
-    //         .then(async result => {
-    //             // This gives you a Google Access Token. You can use it to access the Google API.
-    //             // const credential = FacebookAuthProvider.credentialFromResult(result);
-    //             const token = await result.user.getIdToken()
-    //             const refreshToken = result.user.refreshToken
-    //             // The signed-in user info.
-    //             // const user = result.user;
-    //             // console.log(credential)
-    //             document.cookie = `KBDZToken=${token}; path=/;`
-    //             document.cookie = `KBDZRefreshToken=${refreshToken}; path=/;`
-    //             dispatch(loadCart(result.user.uid))
-    //             router.push('/shop')
-    //             // ...
-    //         }).catch(error => {
-
-    //             const errorCode = error.code
-    //             const errorMessage = error.message
-    //             // The email of the user's account used.
-    //             // const email = error.email
-    //             // The AuthCredential type that was used.
-    //             // const credential = GoogleAuthProvider.credentialFromError(error)
-    //             if (errorCode === 'auth/account-exists-with-different-credential') {
-    //                 return toast('Email already registered', { type: 'error' })
-    //             }
-    //             // console.log(errorMessage)
-
-    //             // ...
-    //     })
-
-    // }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
