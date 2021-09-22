@@ -39,8 +39,8 @@ export const invoiceData = (products: Iitem[], payer: IpayerPaypal) => {
             return {
                 "quantity": item.qty.toString(),
                 "description": item.id.toString(),
-                "tax": 5,
-                "price": item.total
+                "tax": 0,
+                "price": item.price
             }
         }),
         "bottomNotice": "Thank you for choosing KBDZ, have a great day!",
