@@ -5,7 +5,6 @@
 - With firebase authentication, firestore & firebase admin
 - Simple Paypal integration with invoice to be downloaded when the transaction is success
 - Paymaya direct integration it will saved to purchase history
-- 
 
 ## Environment Variables
 
